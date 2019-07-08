@@ -37,8 +37,21 @@
                                     <action selector="touchUpInside:" destination="7Ak-fn-Uki" eventType="touchUpInside" id="2jw-GL-br0"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kUy-DN-iSB">
+                                <rect key="frame" x="345" y="818" width="51" height="31"/>
+                            </switch>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovd-qG-Zmf">
+                                <rect key="frame" x="279" y="818.5" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kUy-DN-iSB" firstAttribute="leading" secondItem="Ovd-qG-Zmf" secondAttribute="trailing" constant="20" id="3MO-nG-6KD"/>
+                            <constraint firstItem="Wm6-AL-i8j" firstAttribute="trailing" secondItem="kUy-DN-iSB" secondAttribute="trailing" constant="20" id="DEK-K9-elo"/>
+                            <constraint firstItem="kUy-DN-iSB" firstAttribute="centerY" secondItem="Ovd-qG-Zmf" secondAttribute="centerY" id="jpt-sl-AAt"/>
+                            <constraint firstItem="Wm6-AL-i8j" firstAttribute="bottom" secondItem="kUy-DN-iSB" secondAttribute="bottom" constant="13" id="l0w-U8-oM2"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Wm6-AL-i8j"/>
                     </view>
                     <connections>

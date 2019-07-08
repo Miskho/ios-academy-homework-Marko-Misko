@@ -13,27 +13,40 @@
         <!--Login View Controller-->
         <scene sceneID="5oA-oe-zu2">
             <objects>
-                <viewController id="7Ak-fn-Uki" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController id="7Ak-fn-Uki" customClass="LoginViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="APe-NI-6iQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufT-oK-WwX">
-                                <rect key="frame" x="141" y="245" width="133" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufT-oK-WwX">
+                                <rect key="frame" x="250" y="447" width="96" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2a-PQ-vvP">
-                                <rect key="frame" x="184" y="459" width="46" height="30"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bPY-Ba-VGs">
+                                <rect key="frame" x="197" y="280" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2a-PQ-vvP">
+                                <rect key="frame" x="77" y="445" width="54" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="touchUpInside:" destination="7Ak-fn-Uki" eventType="touchUpInside" id="2jw-GL-br0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Wm6-AL-i8j"/>
                     </view>
+                    <connections>
+                        <outlet property="myActivityIndicator" destination="bPY-Ba-VGs" id="vTl-S9-5EW"/>
+                        <outlet property="myButton" destination="B2a-PQ-vvP" id="nbv-m9-hk8"/>
+                        <outlet property="myLabel" destination="ufT-oK-WwX" id="PXc-eg-coe"/>
+                        <outlet property="view" destination="APe-NI-6iQ" id="J4c-bS-GzR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qYL-c7-1Eo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

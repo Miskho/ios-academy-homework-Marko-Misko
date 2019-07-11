@@ -18,9 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufT-oK-WwX">
-                                <rect key="frame" x="250" y="447" width="96" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufT-oK-WwX">
+                                <rect key="frame" x="298" y="436" width="48" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -29,28 +28,39 @@
                                 <rect key="frame" x="197" y="280" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2a-PQ-vvP">
-                                <rect key="frame" x="77" y="445" width="54" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2a-PQ-vvP">
+                                <rect key="frame" x="80" y="431" width="198" height="34"/>
+                                <color key="backgroundColor" red="1" green="0.29837244790482942" blue="0.23322059701218578" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="touchUpInside:" destination="7Ak-fn-Uki" eventType="touchUpInside" id="2jw-GL-br0"/>
+                                    <action selector="buttonPressed" destination="7Ak-fn-Uki" eventType="touchUpInside" id="C9r-pn-y7K"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kUy-DN-iSB">
-                                <rect key="frame" x="345" y="818" width="51" height="31"/>
-                            </switch>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovd-qG-Zmf">
-                                <rect key="frame" x="279" y="818.5" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lE-wX-Sku">
+                                <rect key="frame" x="20" y="238" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6M3-GS-Kok">
+                                <rect key="frame" x="82" y="238" width="312" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="kUy-DN-iSB" firstAttribute="leading" secondItem="Ovd-qG-Zmf" secondAttribute="trailing" constant="20" id="3MO-nG-6KD"/>
-                            <constraint firstItem="Wm6-AL-i8j" firstAttribute="trailing" secondItem="kUy-DN-iSB" secondAttribute="trailing" constant="20" id="DEK-K9-elo"/>
-                            <constraint firstItem="kUy-DN-iSB" firstAttribute="centerY" secondItem="Ovd-qG-Zmf" secondAttribute="centerY" id="jpt-sl-AAt"/>
-                            <constraint firstItem="Wm6-AL-i8j" firstAttribute="bottom" secondItem="kUy-DN-iSB" secondAttribute="bottom" constant="13" id="l0w-U8-oM2"/>
+                            <constraint firstItem="6lE-wX-Sku" firstAttribute="leading" secondItem="Wm6-AL-i8j" secondAttribute="leading" constant="20" id="5IT-f5-Z2f"/>
+                            <constraint firstItem="Wm6-AL-i8j" firstAttribute="trailing" secondItem="6M3-GS-Kok" secondAttribute="trailing" constant="20" id="IaP-km-VvK"/>
+                            <constraint firstItem="6M3-GS-Kok" firstAttribute="leading" secondItem="6lE-wX-Sku" secondAttribute="trailing" constant="20" id="MJP-WT-7Fn"/>
+                            <constraint firstItem="ufT-oK-WwX" firstAttribute="leading" secondItem="B2a-PQ-vvP" secondAttribute="trailing" constant="20" id="QvN-NN-ynT"/>
+                            <constraint firstItem="6M3-GS-Kok" firstAttribute="centerY" secondItem="APe-NI-6iQ" secondAttribute="centerY" constant="-200" id="Tlh-CG-eDL"/>
+                            <constraint firstItem="6lE-wX-Sku" firstAttribute="centerY" secondItem="APe-NI-6iQ" secondAttribute="centerY" constant="-200" id="Uj9-la-jF7"/>
+                            <constraint firstItem="ufT-oK-WwX" firstAttribute="centerY" secondItem="APe-NI-6iQ" secondAttribute="centerY" id="ZS6-GJ-e3K"/>
+                            <constraint firstItem="B2a-PQ-vvP" firstAttribute="leading" secondItem="Wm6-AL-i8j" secondAttribute="leading" constant="80" id="esQ-sp-5Gd"/>
+                            <constraint firstItem="B2a-PQ-vvP" firstAttribute="centerY" secondItem="APe-NI-6iQ" secondAttribute="centerY" id="g4d-Wu-fGC"/>
+                            <constraint firstItem="Wm6-AL-i8j" firstAttribute="trailing" secondItem="ufT-oK-WwX" secondAttribute="trailing" constant="68" id="pPw-9t-Vlk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wm6-AL-i8j"/>
                     </view>

@@ -8,10 +8,9 @@
 
 import UIKit
 
-class LoginViewController : UIViewController
-{
+class LoginViewController : UIViewController {
     
-    var tapCounter = 0
+    private var numberOfTaps = 0
     
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView! {
         didSet {
@@ -24,12 +23,10 @@ class LoginViewController : UIViewController
     
     @IBOutlet weak var myButton: UIButton! {
         didSet {
-            myButton.backgroundColor = .green
             myButton.layer.cornerRadius = 20
             myButton.frame.size = CGSize(width: 120.0, height: 60.0)
             
-            let icon = UIImage(named: "Plus") as UIImage?
-            myButton.setImage(icon, for: .normal)
+            myButton.setImage(UIImage(named: "Plus"), for: .normal)
             myButton.setTitle("Increment!", for: .normal)
             myButton.sizeToFit()
         }
@@ -37,20 +34,20 @@ class LoginViewController : UIViewController
     
     @IBOutlet weak var myLabel: UILabel!  {
         didSet {
-            myLabel.text = "\(tapCounter)"
+            myLabel.text = "\(numberOfTaps)"
             myLabel.font = UIFont(name: "Verdana-BoldItalic", size: 45.0)
         }
     }
     
-    @IBAction func touchUpInside(_ sender: Any) {
-        print("It works!")
-        tapCounter += 1
-        myLabel.text = "\(tapCounter)"
-        myActivityIndicator.isAnimating ? myActivityIndicator.stopAnimating() : myActivityIndicator.startAnimating()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .cyan
+        view.backgroundColor = .cyan
+    }
+    
+    @IBAction func buttonPressed() {
+        print("It works!")
+        numberOfTaps += 1
+        myLabel.text = "\(numberOfTaps)"
+        myActivityIndicator.isAnimating ? myActivityIndicator.stopAnimating() : myActivityIndicator.startAnimating()
     }
 }

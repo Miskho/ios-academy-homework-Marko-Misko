@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1FC57B35C1F1C4862DEAACDA /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5106E84427A4EFACF0F4A188 /* Pods_TVShows.framework */; };
 		4204616622CE53DD00740601 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204616522CE53DD00740601 /* AppDelegate.swift */; };
 		4204616D22CE53DE00740601 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4204616C22CE53DE00740601 /* Assets.xcassets */; };
-		4204617022CE53DE00740601 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4204616E22CE53DE00740601 /* LaunchScreen.storyboard */; };
 		4226C4B722CF930D00E81E8C /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4226C4B622CF930D00E81E8C /* Login.storyboard */; };
 		4226C4B922CF934400E81E8C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4226C4B822CF934400E81E8C /* LoginViewController.swift */; };
+		4280CC8222DA4CDE00D621D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4280CC8022DA4CDE00D621D3 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +20,10 @@
 		4204616222CE53DD00740601 /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4204616522CE53DD00740601 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4204616C22CE53DE00740601 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4204616F22CE53DE00740601 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4204617122CE53DE00740601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4226C4B622CF930D00E81E8C /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		4226C4B822CF934400E81E8C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4280CC8122DA4CDE00D621D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5106E84427A4EFACF0F4A188 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF0BD6EFA5870748A483CDD5 /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,11 +61,11 @@
 		4204616422CE53DD00740601 /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
-				4226C4B522CF92DE00E81E8C /* Login */,
-				4204616522CE53DD00740601 /* AppDelegate.swift */,
-				4204616C22CE53DE00740601 /* Assets.xcassets */,
-				4204616E22CE53DE00740601 /* LaunchScreen.storyboard */,
-				4204617122CE53DE00740601 /* Info.plist */,
+				4280CC7722DA471D00D621D3 /* Supporting Files */,
+				4280CC7622DA471600D621D3 /* Resources */,
+				4280CC7422DA46F600D621D3 /* Common */,
+				4280CC7322DA46EE00D621D3 /* Modules */,
+				4280CC7222DA46E500D621D3 /* Application */,
 			);
 			path = TVShows;
 			sourceTree = "<group>";
@@ -79,13 +79,60 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		4280CC7222DA46E500D621D3 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4204616522CE53DD00740601 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		4280CC7322DA46EE00D621D3 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				4226C4B522CF92DE00E81E8C /* Login */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		4280CC7422DA46F600D621D3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		4280CC7622DA471600D621D3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4204616C22CE53DE00740601 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4280CC7722DA471D00D621D3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4280CC7F22DA4CCA00D621D3 /* Base.lproj */,
+				4204617122CE53DE00740601 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4280CC7F22DA4CCA00D621D3 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				4280CC8022DA4CDE00D621D3 /* LaunchScreen.storyboard */,
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
 		6783DF55F76B3B3ABF71004B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				CF0BD6EFA5870748A483CDD5 /* Pods-TVShows.debug.xcconfig */,
 				2D174E12A2651E7D7AB87038 /* Pods-TVShows.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -157,7 +204,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4204617022CE53DE00740601 /* LaunchScreen.storyboard in Resources */,
+				4280CC8222DA4CDE00D621D3 /* LaunchScreen.storyboard in Resources */,
 				4204616D22CE53DE00740601 /* Assets.xcassets in Resources */,
 				4226C4B722CF930D00E81E8C /* Login.storyboard in Resources */,
 			);
@@ -220,10 +267,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4204616E22CE53DE00740601 /* LaunchScreen.storyboard */ = {
+		4280CC8022DA4CDE00D621D3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4204616F22CE53DE00740601 /* Base */,
+				4280CC8122DA4CDE00D621D3 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -353,7 +400,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = TVShows/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TVShows/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -371,7 +418,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = TVShows/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TVShows/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

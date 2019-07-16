@@ -11,5 +11,7 @@ target 'TVShows' do
   pod 'Alamofire'
   
   pod 'CodableAlamofire'
+  
+  pod "PromiseKit", "~> 6.8"
 
 end

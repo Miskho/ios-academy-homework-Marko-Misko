@@ -14,8 +14,12 @@ import CodableAlamofire
 final class LoginViewController : UIViewController {
     
     @IBOutlet private weak var rememberMeButton: UIButton!
-    private var userName: String?
-    private var userEmail: String?
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    
+    private var loggedUser: User?
+    private var loginCredentials: LoginData?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +33,13 @@ final class LoginViewController : UIViewController {
     }
     
     
-    @IBAction func logInButtonPressed(_ sender: Any) {
-        _navigateToHomeView()
+    @IBAction private func logInButtonPressed(_ sender: Any) {
+        _loginUserWith(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
+        createAccountButtonPressed(sender)
     }
     
-    @IBAction func createAccountButtonPressed(_ sender: Any) {
+    @IBAction private func createAccountButtonPressed(_ sender: Any) {
+        _registerUserWith(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
         _navigateToHomeView()
     }
     
@@ -51,7 +57,9 @@ final class LoginViewController : UIViewController {
     private func _registerUserWith(email: String, password: String) {
         SVProgressHUD.show()
         
-        
+        if email.isEmpty || password.isEmpty {
+            return
+        }
         
         let parameters: [String: String] = [
             "email": email,
@@ -72,6 +80,7 @@ final class LoginViewController : UIViewController {
                 switch response.result {
                 case .success(let user):
                     print("Success: \(user)")
+                    self.loggedUser = user
                 case .failure(let error):
                     print("API failure: \(error)")
                 }
@@ -98,8 +107,9 @@ final class LoginViewController : UIViewController {
                 SVProgressHUD.dismiss()
                 
                 switch response.result {
-                case .success(let user):
-                    print("Success: \(user)")
+                case .success(let loginData):
+                    print("Success: \(loginData)")
+                    self.loginCredentials = loginData
                 case .failure(let error):
                     print("API failure: \(error)")
                 }

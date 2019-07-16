@@ -35,12 +35,12 @@ final class LoginViewController : UIViewController {
     
     @IBAction private func logInButtonPressed(_ sender: Any) {
         _loginUserWith(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
-        createAccountButtonPressed(sender)
+        _navigateToHomeView()
     }
     
     @IBAction private func createAccountButtonPressed(_ sender: Any) {
         _registerUserWith(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
-        _navigateToHomeView()
+        logInButtonPressed(sender)
     }
     
     @IBAction private func rememberMePressed() {
@@ -51,6 +51,7 @@ final class LoginViewController : UIViewController {
     private func _navigateToHomeView() {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        homeViewController.email = loggedUser?.email
         navigationController?.pushViewController(homeViewController, animated: true)
     }
     

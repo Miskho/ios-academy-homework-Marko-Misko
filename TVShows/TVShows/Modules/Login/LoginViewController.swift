@@ -17,10 +17,22 @@ final class LoginViewController : UIViewController {
     }
     
     @IBAction func logInButtonPressed(_ sender: Any) {
-        
+        navigateToHomeView()
     }
     
     @IBAction func createAccountButtonPressed(_ sender: Any) {
+        navigateToHomeView()
+    }
+    
+    private func navigateToHomeView() {
+        // We need to instantiate the Storyboard in which our view controller that we want to go to lives
+        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        
+        // We need to instantiate the view controller that we want to go to
+        let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+
+        // We need to push that view controller on top of the navigation stack
+        navigationController?.pushViewController(homeViewController, animated: true)
     }
     
     /*

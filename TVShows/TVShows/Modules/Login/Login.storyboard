@@ -22,7 +22,7 @@
                                 <rect key="frame" x="8" y="96" width="398" height="758"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="N9T-Fe-idS">
-                                        <rect key="frame" x="8" y="8" width="398" height="624"/>
+                                        <rect key="frame" x="0.0" y="8" width="398" height="624"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-logo" translatesAutoresizingMaskIntoConstraints="NO" id="CYG-Bs-uI3">
                                                 <rect key="frame" x="0.0" y="0.0" width="398" height="300"/>
@@ -83,33 +83,32 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Oc6-mj-kWn">
                                                 <rect key="frame" x="0.0" y="436" width="398" height="30"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" enabled="NO" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Isp-aO-HDl">
-                                                        <rect key="frame" x="0.0" y="0.0" width="24" height="30"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <accessibility key="accessibilityConfiguration" label=" "/>
-                                                        <color key="tintColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKn-Se-UIJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="4nX-lz-JMg"/>
+                                                            <constraint firstAttribute="height" constant="30" id="x5W-ws-dOs"/>
+                                                        </constraints>
+                                                        <color key="tintColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" image="ic-checkbox-empty"/>
-                                                        <state key="disabled" image="ic-checkbox-empty"/>
                                                         <state key="selected" image="ic-checkbox-filled"/>
-                                                        <state key="highlighted" image="ic-checkbox-filled"/>
+                                                        <connections>
+                                                            <action selector="rememberMePressed" destination="7Ak-fn-Uki" eventType="touchUpInside" id="8ke-LL-OQj"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hv6-kn-otL">
-                                                        <rect key="frame" x="32" y="0.0" width="366" height="30"/>
+                                                        <rect key="frame" x="38" y="0.0" width="360" height="30"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="qPy-rE-oL6"/>
-                                                </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40C-Tb-wda">
                                                 <rect key="frame" x="0.0" y="482" width="398" height="50"/>
                                                 <color key="backgroundColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="398" id="nca-dr-xE7"/>
                                                     <constraint firstAttribute="height" constant="50" id="pRD-vj-f9W"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="22"/>
@@ -155,10 +154,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="N9T-Fe-idS" firstAttribute="leading" secondItem="isN-ru-cNT" secondAttribute="leading" constant="8" id="BUR-27-E8S"/>
+                                    <constraint firstItem="N9T-Fe-idS" firstAttribute="leading" secondItem="isN-ru-cNT" secondAttribute="leading" id="BUR-27-E8S"/>
                                     <constraint firstAttribute="bottom" secondItem="N9T-Fe-idS" secondAttribute="bottom" constant="8" id="bVm-nn-Qn7"/>
                                     <constraint firstItem="N9T-Fe-idS" firstAttribute="top" secondItem="isN-ru-cNT" secondAttribute="top" constant="8" id="e23-Wt-Nbb"/>
-                                    <constraint firstAttribute="trailing" secondItem="N9T-Fe-idS" secondAttribute="trailing" constant="8" id="fFI-xy-8yW"/>
+                                    <constraint firstAttribute="trailing" secondItem="N9T-Fe-idS" secondAttribute="trailing" id="fFI-xy-8yW"/>
                                     <constraint firstItem="N9T-Fe-idS" firstAttribute="width" secondItem="isN-ru-cNT" secondAttribute="width" id="zKH-oc-QcO"/>
                                 </constraints>
                             </scrollView>
@@ -174,6 +173,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Bbl-aV-fA5"/>
                     <connections>
+                        <outlet property="rememberMeButton" destination="lKn-Se-UIJ" id="6am-Ch-Txq"/>
                         <outlet property="view" destination="APe-NI-6iQ" id="J4c-bS-GzR"/>
                     </connections>
                 </viewController>

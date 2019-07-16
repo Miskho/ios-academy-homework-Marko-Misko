@@ -15,6 +15,7 @@
 		4280CC8222DA4CDE00D621D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4280CC8022DA4CDE00D621D3 /* LaunchScreen.storyboard */; };
 		4280CC8522DCB63600D621D3 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4280CC8422DCB63600D621D3 /* Home.storyboard */; };
 		4280CC8722DCB66100D621D3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4280CC8622DCB66100D621D3 /* HomeViewController.swift */; };
+		4280CC8F22DDC58C00D621D3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4280CC8E22DDC58C00D621D3 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		4280CC8122DA4CDE00D621D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4280CC8422DCB63600D621D3 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		4280CC8622DCB66100D621D3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4280CC8E22DDC58C00D621D3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5106E84427A4EFACF0F4A188 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF0BD6EFA5870748A483CDD5 /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 		4280CC7322DA46EE00D621D3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4280CC8D22DDC54500D621D3 /* Entities */,
 				4280CC8322DCB61C00D621D3 /* Home */,
 				4226C4B522CF92DE00E81E8C /* Login */,
 			);
@@ -139,6 +142,14 @@
 				4280CC8622DCB66100D621D3 /* HomeViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		4280CC8D22DDC54500D621D3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				4280CC8E22DDC58C00D621D3 /* User.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		6783DF55F76B3B3ABF71004B /* Pods */ = {
@@ -274,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4280CC8F22DDC58C00D621D3 /* User.swift in Sources */,
 				4226C4B922CF934400E81E8C /* LoginViewController.swift in Sources */,
 				4204616622CE53DD00740601 /* AppDelegate.swift in Sources */,
 				4280CC8722DCB66100D621D3 /* HomeViewController.swift in Sources */,

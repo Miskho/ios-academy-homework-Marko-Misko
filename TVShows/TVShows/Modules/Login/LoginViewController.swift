@@ -7,34 +7,103 @@
 //
 
 import UIKit
+import SVProgressHUD
+import Alamofire
+import CodableAlamofire
 
 final class LoginViewController : UIViewController {
     
+    @IBOutlet private weak var rememberMeButton: UIButton!
+    private var userName: String?
+    private var userEmail: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        SVProgressHUD.setDefaultMaskType(.black)
         
-        // Do any additional setup after loading the view.
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     
     @IBAction func logInButtonPressed(_ sender: Any) {
-        navigateToHomeView()
+        _navigateToHomeView()
     }
     
     @IBAction func createAccountButtonPressed(_ sender: Any) {
-        navigateToHomeView()
+        _navigateToHomeView()
+    }
+    
+    @IBAction private func rememberMePressed() {
+        rememberMeButton.isSelected.toggle()
     }
     
     
-    private func navigateToHomeView() {
-        // We need to instantiate the Storyboard in which our view controller that we want to go to lives
+    private func _navigateToHomeView() {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        
-        // We need to instantiate the view controller that we want to go to
         let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-
-        // We need to push that view controller on top of the navigation stack
         navigationController?.pushViewController(homeViewController, animated: true)
+    }
+    
+    private func _registerUserWith(email: String, password: String) {
+        SVProgressHUD.show()
+        
+        
+        
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+        
+        Alamofire
+            .request(
+                "https://api.infinum.academy/api/users",
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<User>) in
+                
+                SVProgressHUD.dismiss()
+                
+                switch response.result {
+                case .success(let user):
+                    print("Success: \(user)")
+                case .failure(let error):
+                    print("API failure: \(error)")
+                }
+        }
+    }
+    
+    private func _loginUserWith(email: String, password: String) {
+        SVProgressHUD.show()
+        
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+        
+        Alamofire
+            .request(
+                "https://api.infinum.academy/api/users/sessions",
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<LoginData>) in
+                
+                SVProgressHUD.dismiss()
+                
+                switch response.result {
+                case .success(let user):
+                    print("Success: \(user)")
+                case .failure(let error):
+                    print("API failure: \(error)")
+                }
+        }
     }
     
     /*

@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import SVProgressHUD
 import Alamofire
 import CodableAlamofire
+import PromiseKit
+import SVProgressHUD
 
 final class LoginViewController : UIViewController {
     
@@ -34,7 +35,7 @@ final class LoginViewController : UIViewController {
     
     
     @IBAction private func logInButtonPressed(_ sender: Any) {
-        _loginUserWith(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
+        _logInUserWith(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
         _navigateToHomeView()
     }
     
@@ -62,16 +63,14 @@ final class LoginViewController : UIViewController {
             return
         }
         
-        let parameters: [String: String] = [
-            "email": email,
-            "password": password
-        ]
-        
         Alamofire
             .request(
                 "https://api.infinum.academy/api/users",
                 method: .post,
-                parameters: parameters,
+                parameters: [
+                    "email": email,
+                    "password": password
+                ],
                 encoding: JSONEncoding.default)
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<User>) in
@@ -88,19 +87,17 @@ final class LoginViewController : UIViewController {
         }
     }
     
-    private func _loginUserWith(email: String, password: String) {
+    private func _logInUserWith(email: String, password: String) {
         SVProgressHUD.show()
-        
-        let parameters: [String: String] = [
-            "email": email,
-            "password": password
-        ]
         
         Alamofire
             .request(
                 "https://api.infinum.academy/api/users/sessions",
                 method: .post,
-                parameters: parameters,
+                parameters: [
+                    "email": email,
+                    "password": password
+                ],
                 encoding: JSONEncoding.default)
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<LoginData>) in
@@ -117,6 +114,56 @@ final class LoginViewController : UIViewController {
         }
     }
     
+    private func _registerUserUsingPromisesWith(email: String, password: String) {
+        SVProgressHUD.show()
+        firstly {
+            Alamofire.request(
+                "https://api.infinum.academy/api/users",
+                method: .post,
+                parameters: [
+                    "email": email,
+                    "password": password
+                ],
+                encoding: JSONEncoding.default)
+                .validate()
+                .responseDecodable(User.self)
+            }.done { user in
+                self.loggedUser = user
+                print("Success: \(user)")
+            }
+            .ensure {
+                SVProgressHUD.dismiss()
+            }.catch { error in
+                print("API failure: \(error)")
+        }
+    }
+    
+    private func _logInUserUsingPromisesWith(email: String, password: String) {
+        SVProgressHUD.show()
+        firstly {
+            Alamofire.request(
+                "https://api.infinum.academy/api/users/sessions",
+                method: .post,
+                parameters: [
+                    "email": email,
+                    "password": password
+                ],
+                encoding: JSONEncoding.default)
+                .validate()
+                .responseDecodable(LoginData.self)
+            }.done { loginData in
+                self.loginCredentials = loginData
+                print("Success: \(loginData)")
+            }
+            .ensure {
+                SVProgressHUD.dismiss()
+            }.catch { error in
+                print("API failure: \(error)")
+        }
+    }
+    
+    
+    
     /*
      // MARK: - Navigation
      
@@ -126,5 +173,6 @@ final class LoginViewController : UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    
     
 }

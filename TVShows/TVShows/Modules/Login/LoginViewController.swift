@@ -18,14 +18,12 @@ final class LoginViewController : UIViewController {
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     
-    private var loggedUser: User?
     private var loginCredentials: LoginData?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         SVProgressHUD.setDefaultMaskType(.black)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,13 +33,30 @@ final class LoginViewController : UIViewController {
     
     
     @IBAction private func logInButtonPressed(_ sender: Any) {
-        _logInUserWith(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
-        _navigateToHomeView()
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+            else {
+                return
+                
+        }
+        _logInUserUsingPromisesWith(email: email, password: password)
+        
     }
     
     @IBAction private func createAccountButtonPressed(_ sender: Any) {
-        _registerUserWith(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
-        logInButtonPressed(sender)
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+            else {
+                return
+        }
+        _registerUserUsingPromisesWith(email: email, password: password)
+        
     }
     
     @IBAction private func rememberMePressed() {
@@ -52,16 +67,14 @@ final class LoginViewController : UIViewController {
     private func _navigateToHomeView() {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        homeViewController.email = loggedUser?.email
+        
+        homeViewController.loginCredentials = loginCredentials
+        
         navigationController?.pushViewController(homeViewController, animated: true)
     }
     
     private func _registerUserWith(email: String, password: String) {
         SVProgressHUD.show()
-        
-        if email.isEmpty || password.isEmpty {
-            return
-        }
         
         Alamofire
             .request(
@@ -80,12 +93,13 @@ final class LoginViewController : UIViewController {
                 switch response.result {
                 case .success(let user):
                     print("Success: \(user)")
-                    self.loggedUser = user
+                    self._logInUserWith(email: email, password: password)
                 case .failure(let error):
                     print("API failure: \(error)")
                 }
         }
     }
+    
     
     private func _logInUserWith(email: String, password: String) {
         SVProgressHUD.show()
@@ -108,30 +122,32 @@ final class LoginViewController : UIViewController {
                 case .success(let loginData):
                     print("Success: \(loginData)")
                     self.loginCredentials = loginData
+                    self._navigateToHomeView()
                 case .failure(let error):
                     print("API failure: \(error)")
                 }
         }
     }
     
+}
+
+// Provides the same API functionalities using Promises from PromiseKit
+extension LoginViewController {
+    
     private func _registerUserUsingPromisesWith(email: String, password: String) {
         SVProgressHUD.show()
-        firstly {
-            Alamofire.request(
-                "https://api.infinum.academy/api/users",
-                method: .post,
-                parameters: [
-                    "email": email,
-                    "password": password
-                ],
-                encoding: JSONEncoding.default)
-                .validate()
-                .responseDecodable(User.self)
+        firstly { () -> Promise<User> in
+            let registerUserHTTPRequestHeaderData = AvailableRequestsFromLoginViewController.registerUser
+            return _sendAlamofireHTTPRequestTo(url: registerUserHTTPRequestHeaderData.1, method: registerUserHTTPRequestHeaderData.0
+                , email: email, password: password)
+            
+            }.then { (user: User) -> Promise<LoginData> in
+                let logInUserHTTPRequestHeaderData = AvailableRequestsFromLoginViewController.loginUser
+                return self._sendAlamofireHTTPRequestTo(url: logInUserHTTPRequestHeaderData.1, method: logInUserHTTPRequestHeaderData.0
+                    , email: email, password: password)
             }.done { user in
-                self.loggedUser = user
                 print("Success: \(user)")
-            }
-            .ensure {
+            }.ensure {
                 SVProgressHUD.dismiss()
             }.catch { error in
                 print("API failure: \(error)")
@@ -140,20 +156,15 @@ final class LoginViewController : UIViewController {
     
     private func _logInUserUsingPromisesWith(email: String, password: String) {
         SVProgressHUD.show()
-        firstly {
-            Alamofire.request(
-                "https://api.infinum.academy/api/users/sessions",
-                method: .post,
-                parameters: [
-                    "email": email,
-                    "password": password
-                ],
-                encoding: JSONEncoding.default)
-                .validate()
-                .responseDecodable(LoginData.self)
-            }.done { loginData in
+        let logInUserHTTPRequestHeaderData = AvailableRequestsFromLoginViewController.loginUser
+        firstly { () -> Promise<LoginData> in
+            _sendAlamofireHTTPRequestTo(url: logInUserHTTPRequestHeaderData.1, method: logInUserHTTPRequestHeaderData.0
+                , email: email, password: password)
+            }
+            .done { loginData in
                 self.loginCredentials = loginData
                 print("Success: \(loginData)")
+                self._navigateToHomeView()
             }
             .ensure {
                 SVProgressHUD.dismiss()
@@ -162,17 +173,21 @@ final class LoginViewController : UIViewController {
         }
     }
     
+    private func _sendAlamofireHTTPRequestTo<T: Codable>(url: String, method: HTTPMethod, email: String, password: String) -> Promise<T>{
+        return Alamofire.request(
+            url,
+            method: method,
+            parameters: [
+                "email": email,
+                "password": password
+            ],
+            encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodable(T.self, keyPath: "data")
+    }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    
+    private enum AvailableRequestsFromLoginViewController {
+        static let registerUser = (HTTPMethod.post, "https://api.infinum.academy/api/users")
+        static let loginUser = (HTTPMethod.post, "https://api.infinum.academy/api/users/sessions")
+    }
 }

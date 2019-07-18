@@ -12,12 +12,11 @@ final class HomeViewController: UIViewController {
     
     @IBOutlet public var userLabel: UILabel!
     
-    var email: String?
+    var loginCredentials: LoginData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userLabel.text = email!
-        // Do any additional setup after loading the view.
+        userLabel.text = loginCredentials?.token
     }
     
     

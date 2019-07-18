@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 struct User: Codable {
     let email: String

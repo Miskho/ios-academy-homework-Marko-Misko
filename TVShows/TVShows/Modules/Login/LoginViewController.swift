@@ -19,6 +19,8 @@ final class LoginViewController : UIViewController {
     @IBOutlet private weak var passwordTextField: UITextField!
     
     private var loginCredentials: LoginData?
+    private var loginUser: User?
+
     
     
     override func viewDidLoad() {
@@ -68,8 +70,11 @@ final class LoginViewController : UIViewController {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         
-        homeViewController.loginCredentials = loginCredentials
         
+        
+        homeViewController.loginCredentials = loginCredentials
+        homeViewController.loginUser = loginUser
+
         navigationController?.pushViewController(homeViewController, animated: true)
     }
     
@@ -93,6 +98,7 @@ final class LoginViewController : UIViewController {
                 switch response.result {
                 case .success(let user):
                     print("Success: \(user)")
+                    self.loginUser = user
                     self._logInUserWith(email: email, password: password)
                 case .failure(let error):
                     print("API failure: \(error)")
@@ -140,13 +146,14 @@ extension LoginViewController {
             let registerUserHTTPRequestHeaderData = AvailableRequestsFromLoginViewController.registerUser
             return _sendAlamofireHTTPRequestTo(url: registerUserHTTPRequestHeaderData.1, method: registerUserHTTPRequestHeaderData.0
                 , email: email, password: password)
-            
             }.then { (user: User) -> Promise<LoginData> in
+                self.loginUser = user
                 let logInUserHTTPRequestHeaderData = AvailableRequestsFromLoginViewController.loginUser
                 return self._sendAlamofireHTTPRequestTo(url: logInUserHTTPRequestHeaderData.1, method: logInUserHTTPRequestHeaderData.0
                     , email: email, password: password)
             }.done { user in
                 print("Success: \(user)")
+                self._navigateToHomeView()
             }.ensure {
                 SVProgressHUD.dismiss()
             }.catch { error in

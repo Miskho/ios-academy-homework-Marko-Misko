@@ -13,6 +13,7 @@ final class HomeViewController: UIViewController {
     @IBOutlet public var userLabel: UILabel!
     
     var loginCredentials: LoginData?
+    var loginUser: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()

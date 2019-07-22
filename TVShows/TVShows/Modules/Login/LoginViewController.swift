@@ -29,7 +29,6 @@ final class LoginViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     
@@ -71,7 +70,7 @@ final class LoginViewController : UIViewController {
         
         homeViewController.loginCredentials = loginCredentials
         homeViewController.loginUser = loginUser
-        navigationController?.pushViewController(homeViewController, animated: true)
+        navigationController?.setViewControllers([homeViewController], animated: true)
     }
     
     private func _registerUserWith(email: String, password: String) {

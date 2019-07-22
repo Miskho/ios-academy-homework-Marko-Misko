@@ -76,6 +76,14 @@ extension HomeViewController: UITableViewDelegate {
         print("Selected Item: \(item)")
     }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tvShows.remove(at: indexPath.row)
+        }
+     
+        return [delete]
+    }
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -89,6 +97,10 @@ extension HomeViewController: UITableViewDataSource {
         
         cell.configure(with: tvShows[indexPath.row])
         return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
 }

@@ -7,28 +7,88 @@
 //
 
 import UIKit
+import Alamofire
+import CodableAlamofire
+import PromiseKit
+import SVProgressHUD
 
 final class HomeViewController: UIViewController {
     
-    @IBOutlet public var userLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView!
+    
+    private var tvShows = [TVShow]()  {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     var loginCredentials: LoginData?
     var loginUser: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userLabel.text = loginCredentials?.token
+        _setupTableView()
+        _displayTVShows()
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func _setupTableView() {
+        tableView.estimatedRowHeight = 110
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.tableFooterView = UIView()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    // Side effect: assigns the data fetched via API call to the property
+    // tvShows, effectively causing the tableView to be reloaded
+    private func _displayTVShows() {
+        SVProgressHUD.show()
+        
+        firstly { () -> Promise<[TVShow]> in
+            let headers = ["Authorization": loginCredentials!.token]
+            return Alamofire
+                .request(
+                    "https://api.infinum.academy/api/shows",
+                    method: .get,
+                    encoding: JSONEncoding.default,
+                    headers: headers
+                ).validate()
+                .responseDecodable([TVShow].self, keyPath: "data")
+            }.done() { [weak self]  in
+                print("Success: \($0)")
+                self?.tvShows = $0
+            }.ensure {
+                SVProgressHUD.dismiss()
+            }.catch {
+                print("API failure: \($0)")
+        }
+    }
+}
+
+// MARK: - UITableView
+extension HomeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let item = tvShows[indexPath.row]
+        print("Selected Item: \(item)")
+    }
+    
+}
+
+extension HomeViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tvShows.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TVShowTableViewCell.self), for: indexPath) as! TVShowTableViewCell
+        
+        cell.configure(with: tvShows[indexPath.row])
+        return cell
+    }
     
 }

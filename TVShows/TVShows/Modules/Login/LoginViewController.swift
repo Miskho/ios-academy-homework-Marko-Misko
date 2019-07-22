@@ -165,13 +165,13 @@ extension LoginViewController {
                 let logInUserHTTPRequestHeaderData = AvailableRequestsFromLoginViewController.loginUser
                 return self._sendAlamofireHTTPRequestTo(logInUserHTTPRequestHeaderData.url, method: logInUserHTTPRequestHeaderData.method
                     , email: email, password: password)
-            }.done { user in
-                print("Success: \(user)")
-                self._navigateToHomeView()
+            }.done { [weak self] in
+                print("Success: \($0)")
+                self?._navigateToHomeView()
             }.ensure {
                 SVProgressHUD.dismiss()
-            }.catch { [weak self] error in
-                print("API failure: \(error)")
+            }.catch { [weak self] in
+                print("API failure: \($0)")
                 self?._displayLoginFailedAlert()
         }
     }
@@ -183,15 +183,15 @@ extension LoginViewController {
             _sendAlamofireHTTPRequestTo(logInUserHTTPRequestHeaderData.url, method: logInUserHTTPRequestHeaderData.method
                 , email: email, password: password)
             }
-            .done { loginData in
-                self.loginCredentials = loginData
-                print("Success: \(loginData)")
-                self._navigateToHomeView()
+            .done { [weak self] in
+                self?.loginCredentials = $0
+                print("Success: \($0)")
+                self?._navigateToHomeView()
             }
             .ensure {
                 SVProgressHUD.dismiss()
-            }.catch { [weak self] error in
-                print("API failure: \(error)")
+            }.catch { [weak self] in
+                print("API failure: \($0)")
                 self?._displayLoginFailedAlert()
         }
     }
@@ -208,4 +208,5 @@ extension LoginViewController {
             .validate()
             .responseDecodable(T.self, keyPath: "data")
     }
+    
 }

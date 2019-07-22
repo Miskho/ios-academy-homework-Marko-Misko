@@ -16,11 +16,7 @@ final class HomeViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private var tvShows = [TVShow]()  {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    private var tvShows = [TVShow]()
     
     var loginCredentials: LoginData?
     var loginUser: User?
@@ -59,6 +55,7 @@ final class HomeViewController: UIViewController {
             }.done() { [weak self]  in
                 print("Success: \($0)")
                 self?.tvShows = $0
+                self?.tableView.reloadData()
             }.ensure {
                 SVProgressHUD.dismiss()
             }.catch {
@@ -78,8 +75,8 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            tableView.deleteRows(at: [indexPath], with: .automatic)
             self.tvShows.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
      
         return [delete]

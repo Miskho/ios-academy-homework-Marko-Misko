@@ -10,7 +10,8 @@ import UIKit
 
 class TVShowTableViewCell: UITableViewCell {
     
-    @IBOutlet private weak var title: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,15 +19,15 @@ class TVShowTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        title.text = nil
+        titleLabel.text = nil
     }
     
 }
 
 // MARK: - Configure
 extension TVShowTableViewCell {
-    func configure(with item: TVShow) {
-        title.text = item.title
+    func configure(with episode: TVShow) {
+        titleLabel.text = episode.title
     }
 }
 

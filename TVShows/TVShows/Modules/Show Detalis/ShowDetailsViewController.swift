@@ -60,7 +60,7 @@ class ShowDetailsViewController: UIViewController {
         let headers = ["Authorization": loginCredentials!.token]
         return Alamofire
             .request(
-                "https://api.infinum.academy/api/shows/\(String(describing: show?.id))",
+                "https://api.infinum.academy/api/shows/\(String(describing: show!.id))",
                 method: .get,
                 encoding: JSONEncoding.default,
                 headers: headers
@@ -72,7 +72,7 @@ class ShowDetailsViewController: UIViewController {
         let headers = ["Authorization": loginCredentials!.token]
         return Alamofire
             .request(
-                "https://api.infinum.academy/api/shows/\(String(describing: show?.id))/episodes",
+                "https://api.infinum.academy/api/shows/\(String(describing: show!.id))/episodes",
                 method: .get,
                 encoding: JSONEncoding.default,
                 headers: headers
@@ -105,6 +105,7 @@ extension ShowDetailsViewController: UITableViewDelegate {
         return [delete]
     }
 }
+
 
 extension ShowDetailsViewController: UITableViewDataSource {
     

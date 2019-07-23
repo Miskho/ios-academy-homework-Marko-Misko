@@ -46,6 +46,15 @@ class ShowDetailsViewController: UIViewController {
         }
     }
     
+    func _setupTableView() {
+        episodesTableView.estimatedRowHeight = 110
+        episodesTableView.rowHeight = UITableView.automaticDimension
+        episodesTableView.tableFooterView = UIView()
+        
+        episodesTableView.delegate = self
+        episodesTableView.dataSource = self
+    }
+    
     
     private func _fetchShowDetails() -> Promise<ShowDetails> {
         let headers = ["Authorization": loginCredentials!.token]
@@ -74,6 +83,7 @@ class ShowDetailsViewController: UIViewController {
     private func _displayShowDetails() {
         showTitleLabel.text = show?.title
         showDescriptionLabel.text = showDetails?.description
+        episodesTableView.reloadData()
     }
     
 }

@@ -1,14 +1,14 @@
 //
-//  TVShowHomeTableViewCell.swift
+//  EpisodeTableViewCell.swift
 //  TVShows
 //
-//  Created by Infinum on 21/07/2019.
+//  Created by Infinum on 23/07/2019.
 //  Copyright © 2019 Infinum. All rights reserved.
 //
 
 import UIKit
 
-class TVShowTableViewCell: UITableViewCell {
+class EpisodeTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var title: UILabel!
     
@@ -24,9 +24,9 @@ class TVShowTableViewCell: UITableViewCell {
 }
 
 // MARK: - Configure
-extension TVShowTableViewCell {
-    func configure(with item: TVShow) {
-        title.text = item.title
+extension EpisodeTableViewCell {
+    func configure(with episode: Episode) {
+        title.text = episode.title
     }
 }
 

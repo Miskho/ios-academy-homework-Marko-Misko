@@ -71,9 +71,9 @@ extension HomeViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let item = tvShows[indexPath.row]
         
-        let showDetailsStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        let showDetailsStoryboard = UIStoryboard(name: "ShowDetails", bundle: nil)
         let showDetailsViewController = showDetailsStoryboard.instantiateViewController(withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
-        showDetailsViewController.showID = tvShows[indexPath.row]
+        showDetailsViewController.show = tvShows[indexPath.row]
         showDetailsViewController.loginCredentials = loginCredentials
         
         print("Selected Item: \(item)")

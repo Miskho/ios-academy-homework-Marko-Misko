@@ -28,7 +28,20 @@ class ShowDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        _setupShowDetailsViewController()
+    }
+    
+    @IBAction func backToHomeButtonPressed(_ sender: Any) {
+        _navigateToHomeViewController()
+    }
+    
+    @IBAction func newEpisodeButtonPressed(_ sender: Any) {
+        _navigateToNewEpisodeViewController()
+    }
+    
+    
+    private func _setupShowDetailsViewController() {
         SVProgressHUD.show()
         
         firstly { () -> Promise<ShowDetails> in
@@ -36,8 +49,8 @@ class ShowDetailsViewController: UIViewController {
             }.then { [weak self] (showDetails: ShowDetails) -> Promise<[Episode]> in
                 self?.showDetails = showDetails
                 return self!._fetchEpisodes()
-            }.done { [weak self] episodes in
-                self?.episodes = episodes
+            }.done { [weak self]  in
+                self?.episodes = $0
                 self?._displayShowDetails()
             }.ensure {
                 SVProgressHUD.dismiss()
@@ -45,16 +58,6 @@ class ShowDetailsViewController: UIViewController {
                 print("API failure: \($0)")
         }
     }
-    
-    func _setupTableView() {
-        episodesTableView.estimatedRowHeight = 110
-        episodesTableView.rowHeight = UITableView.automaticDimension
-        episodesTableView.tableFooterView = UIView()
-        
-        episodesTableView.delegate = self
-        episodesTableView.dataSource = self
-    }
-    
     
     private func _fetchShowDetails() -> Promise<ShowDetails> {
         let headers = ["Authorization": loginCredentials!.token]
@@ -83,7 +86,32 @@ class ShowDetailsViewController: UIViewController {
     private func _displayShowDetails() {
         showTitleLabel.text = show?.title
         showDescriptionLabel.text = showDetails?.description
+        _setupTableView()
         episodesTableView.reloadData()
+    }
+    
+    private func _setupTableView() {
+        episodesTableView.estimatedRowHeight = 110
+        episodesTableView.rowHeight = UITableView.automaticDimension
+        episodesTableView.tableFooterView = UIView()
+        
+        episodesTableView.delegate = self
+        episodesTableView.dataSource = self
+    }
+    
+    private func _navigateToNewEpisodeViewController() {
+        let newEpisodeStoryboard = UIStoryboard(name: "NewEpisode", bundle: nil)
+        let newEpisodeViewController = newEpisodeStoryboard.instantiateViewController(withIdentifier: "NewEpisodeViewController") as! NewEpisodeViewController
+        newEpisodeViewController.loginCredentials = loginCredentials
+        newEpisodeViewController.show = show
+        
+        let navigationController = UINavigationController(rootViewController:
+            newEpisodeViewController)
+        present(navigationController, animated: true)
+    }
+    
+    private func _navigateToHomeViewController() {
+        navigationController?.popViewController(animated: true)
     }
     
 }
@@ -122,6 +150,14 @@ extension ShowDetailsViewController: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+}
+
+extension ShowDetailsViewController: NewEpisodeReloadTableViewDelegate {
+    
+    func newEpisodeAdded() {
+        episodesTableView.reloadData()
     }
     
 }

@@ -26,8 +26,8 @@ class TVShowTableViewCell: UITableViewCell {
 
 // MARK: - Configure
 extension TVShowTableViewCell {
-    func configure(with episode: TVShow) {
-        titleLabel.text = episode.title
+    func configure(with show: TVShow) {
+        titleLabel.text = show.title
     }
 }
 

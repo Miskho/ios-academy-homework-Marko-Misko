@@ -16,7 +16,7 @@
 		426B35B822E7140F0066003A /* ShowDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426B35B722E7140F0066003A /* ShowDetailsViewController.swift */; };
 		426B35BE22E7389E0066003A /* ShowDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426B35BD22E7389E0066003A /* ShowDetails.swift */; };
 		426B35C122E7397E0066003A /* NewEpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426B35C022E7397E0066003A /* NewEpisodeViewController.swift */; };
-		426B35C322E7398F0066003A /* NewEpisodeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 426B35C222E7398F0066003A /* NewEpisodeStoryboard.storyboard */; };
+		426B35C322E7398F0066003A /* NewEpisode.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 426B35C222E7398F0066003A /* NewEpisode.storyboard */; };
 		426B35C522E73DBF0066003A /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426B35C422E73DBF0066003A /* Episode.swift */; };
 		4280CC8222DA4CDE00D621D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4280CC8022DA4CDE00D621D3 /* LaunchScreen.storyboard */; };
 		4280CC8522DCB63600D621D3 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4280CC8422DCB63600D621D3 /* Home.storyboard */; };
@@ -40,7 +40,7 @@
 		426B35B722E7140F0066003A /* ShowDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsViewController.swift; sourceTree = "<group>"; };
 		426B35BD22E7389E0066003A /* ShowDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetails.swift; sourceTree = "<group>"; };
 		426B35C022E7397E0066003A /* NewEpisodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEpisodeViewController.swift; sourceTree = "<group>"; };
-		426B35C222E7398F0066003A /* NewEpisodeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewEpisodeStoryboard.storyboard; sourceTree = "<group>"; };
+		426B35C222E7398F0066003A /* NewEpisode.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewEpisode.storyboard; sourceTree = "<group>"; };
 		426B35C422E73DBF0066003A /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		4280CC8122DA4CDE00D621D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4280CC8422DCB63600D621D3 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -113,21 +113,21 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		426B35B622E713D60066003A /* Show Detalis */ = {
+		426B35B622E713D60066003A /* Show Details */ = {
 			isa = PBXGroup;
 			children = (
 				42850F8A22E751D00052F05F /* Cell */,
 				426B35B722E7140F0066003A /* ShowDetailsViewController.swift */,
 				428112F022E75C2F008BB945 /* ShowDetails.storyboard */,
 			);
-			path = "Show Detalis";
+			path = "Show Details";
 			sourceTree = "<group>";
 		};
 		426B35BF22E7393A0066003A /* New Episode */ = {
 			isa = PBXGroup;
 			children = (
 				426B35C022E7397E0066003A /* NewEpisodeViewController.swift */,
-				426B35C222E7398F0066003A /* NewEpisodeStoryboard.storyboard */,
+				426B35C222E7398F0066003A /* NewEpisode.storyboard */,
 			);
 			path = "New Episode";
 			sourceTree = "<group>";
@@ -144,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				426B35BF22E7393A0066003A /* New Episode */,
-				426B35B622E713D60066003A /* Show Detalis */,
+				426B35B622E713D60066003A /* Show Details */,
 				4280CC8D22DDC54500D621D3 /* Entities */,
 				4280CC8322DCB61C00D621D3 /* Home */,
 				4226C4B522CF92DE00E81E8C /* Login */,
@@ -294,7 +294,7 @@
 				428112F122E75C2F008BB945 /* ShowDetails.storyboard in Resources */,
 				42D4DA8E22E0983A0061591A /* Login.storyboard in Resources */,
 				4280CC8222DA4CDE00D621D3 /* LaunchScreen.storyboard in Resources */,
-				426B35C322E7398F0066003A /* NewEpisodeStoryboard.storyboard in Resources */,
+				426B35C322E7398F0066003A /* NewEpisode.storyboard in Resources */,
 				4204616D22CE53DE00740601 /* Assets.xcassets in Resources */,
 				4280CC8522DCB63600D621D3 /* Home.storyboard in Resources */,
 			);

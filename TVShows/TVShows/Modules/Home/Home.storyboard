@@ -49,7 +49,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="title" destination="iRh-PF-K2p" id="gql-93-kuk"/>
+                                            <outlet property="titleLabel" destination="iRh-PF-K2p" id="pmN-es-fNv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -90,7 +90,7 @@ extension LoginViewController {
                 , password: password)
             }.then { [weak self] (user: User) -> Promise<LoginData> in
                 guard let self = self else {
-                    return Promise(LoginViewControllerError.loginViewControllerDeinitialised(error: <#T##Error#>))
+                    return Promise(error: NSError())
                 }
                 self.loginUser = user
                 return self._sendAlamofireHTTPRequestTo(
@@ -144,8 +144,4 @@ extension LoginViewController {
             .responseDecodable(T.self, keyPath: "data")
     }
 
-}
-
-enum LoginViewControllerError: Error {
-    case loginViewControllerDeinitialised(error: Error)
 }

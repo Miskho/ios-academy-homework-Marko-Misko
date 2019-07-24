@@ -27,6 +27,10 @@ class NewEpisodeViewController: UIViewController {
     weak var newEpisodeDelegate: NewEpisodeReloadTableViewDelegate?
     var loginCredentials: LoginData?
     var show: TVShow?
+    var episodeTitle: String?
+    var seasonNumber: String?
+    var episodeNumber: String?
+    var episodeDescription: String?
     
     
     override func viewDidLoad() {
@@ -66,26 +70,35 @@ class NewEpisodeViewController: UIViewController {
     
     private func _registerNewEpisode() {
         let headers = ["Authorization": loginCredentials!.token]
+        
+        guard let episodeTitle = episodeTitleTextField.text,
+            let seasonNumber = seasonNumberTextField.text,
+            let episodeNumber = episodeNumberTextField.text,
+            let episodeDescription = episodeDescriptionTextField.text else {
+                _displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please provide all fields below for registering new episode.", preferredStyle: .alert))
+                // _displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please check the validity of provided data for registering new episode.", preferredStyle: .alert))
+                return
+        }
+        
         Alamofire
             .request(
                 "https://api.infinum.academy/api/episodes",
                 method: .post,
                 parameters: [
-                    "showId": "s",
+                    "showId": show!.id,
                     "mediaId": "s",
-                    "title": "string",
-                    "description": "string",
-                    "episodeNumber": "string",
-                    "season": "string"
+                    "title": episodeTitle,
+                    "description": episodeDescription,
+                    "episodeNumber": episodeNumber,
+                    "season": seasonNumber
                 ],
                 encoding: JSONEncoding.default,
                 headers: headers
             ).validate()
+        
     }
     
-    private func _displayFailedEpisodeRegistrationAlert() {
-        let alertController = UIAlertController(title: "Could not add new episode", message: "Please check the validity of provided data for registering new episode.", preferredStyle: .alert)
-        
+    private func _displaySimpleDisposableAlertUsing(_ alertController: UIAlertController) {
         let OKAction = UIAlertAction(title: "Ok", style: .default) { _ in
             alertController.dismiss(animated: true, completion: nil)
         }

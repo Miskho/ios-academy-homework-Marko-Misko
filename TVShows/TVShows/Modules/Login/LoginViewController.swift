@@ -84,11 +84,6 @@ final class LoginViewController : UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    private enum AvailableRequestsFromLoginViewController {
-        static let registerUser = (method: HTTPMethod.post, url: "https://api.infinum.academy/api/users")
-        static let loginUser = (method: HTTPMethod.post, url: "https://api.infinum.academy/api/users/sessions")
-    }
-    
 }
 
 // Provides the same API functionalities using Promises from PromiseKit

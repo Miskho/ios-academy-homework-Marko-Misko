@@ -24,13 +24,27 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Q7o-b9-VyA">
                                         <rect key="frame" x="0.0" y="0.0" width="366" height="546"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ecn-RX-rap">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNV-zR-U0e">
                                                 <rect key="frame" x="0.0" y="0.0" width="366" height="300"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ecn-RX-rap">
+                                                        <rect key="frame" x="100" y="100" width="166" height="100"/>
+                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                        <inset key="titleEdgeInsets" minX="0.0" minY="60" maxX="29" maxY="0.0"/>
+                                                        <inset key="imageEdgeInsets" minX="60" minY="0.0" maxX="-1" maxY="0.0"/>
+                                                        <state key="normal" title="Upload photo" image="ic-camera">
+                                                            <color key="titleColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="300" id="cA0-Xs-BDX"/>
+                                                    <constraint firstItem="ecn-RX-rap" firstAttribute="top" secondItem="RNV-zR-U0e" secondAttribute="top" constant="100" id="1Lz-kL-kqH"/>
+                                                    <constraint firstItem="ecn-RX-rap" firstAttribute="leading" secondItem="RNV-zR-U0e" secondAttribute="leading" constant="100" id="E6W-sq-Hgk"/>
+                                                    <constraint firstAttribute="bottom" secondItem="ecn-RX-rap" secondAttribute="bottom" constant="100" id="H8L-wX-3xy"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ecn-RX-rap" secondAttribute="trailing" constant="100" id="t7a-Nf-LdC"/>
                                                 </constraints>
-                                                <state key="normal" image="ic-camera"/>
-                                            </button>
+                                            </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="BTD-mv-VXR">
                                                 <rect key="frame" x="0.0" y="300" width="366" height="246"/>
                                                 <subviews>

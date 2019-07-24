@@ -14,16 +14,16 @@ import SVProgressHUD
 
 class ShowDetailsViewController: UIViewController {
     
-    @IBOutlet weak var showTitleLabel: UILabel!
-    @IBOutlet weak var showDescriptionLabel: UILabel!
-    @IBOutlet weak var showImage: UIImageView!
-    @IBOutlet weak var episodesTableView: UITableView!
-    @IBOutlet weak var newEpisodeButton: UIButton!
+    @IBOutlet private weak var showTitleLabel: UILabel!
+    @IBOutlet private weak var showDescriptionLabel: UILabel!
+    @IBOutlet private weak var episodeCountLabel: UILabel!
+    @IBOutlet private weak var showImage: UIImageView!
+    @IBOutlet private weak var episodesTableView: UITableView!
     
     var show: TVShow?
     var loginCredentials: LoginData?
-    var showDetails: ShowDetails?
-    var episodes = [Episode]()
+    private var showDetails: ShowDetails?
+    private var episodes = [Episode]()
     
     
     override func viewDidLoad() {
@@ -63,7 +63,7 @@ class ShowDetailsViewController: UIViewController {
         let headers = ["Authorization": loginCredentials!.token]
         return Alamofire
             .request(
-                "https://api.infinum.academy/api/shows/\(String(describing: show!.id))",
+                "https://api.infinum.academy/api/shows/\(show!.id)",
                 method: .get,
                 encoding: JSONEncoding.default,
                 headers: headers
@@ -75,7 +75,7 @@ class ShowDetailsViewController: UIViewController {
         let headers = ["Authorization": loginCredentials!.token]
         return Alamofire
             .request(
-                "https://api.infinum.academy/api/shows/\(String(describing: show!.id))/episodes",
+                "https://api.infinum.academy/api/shows/\(show!.id)/episodes",
                 method: .get,
                 encoding: JSONEncoding.default,
                 headers: headers
@@ -86,6 +86,7 @@ class ShowDetailsViewController: UIViewController {
     private func _displayShowDetails() {
         showTitleLabel.text = show?.title
         showDescriptionLabel.text = showDetails?.description
+        episodeCountLabel.text = String(describing: episodes.count)
         _setupTableView()
         episodesTableView.reloadData()
     }

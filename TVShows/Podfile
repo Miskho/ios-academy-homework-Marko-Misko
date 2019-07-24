@@ -4,8 +4,15 @@ platform :ios, '11.0'
 target 'TVShows' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
+  
   # Pods for TVShows
-  pod 'MBProgressHUD', '~> 1.1.0'
-
+  pod 'SVProgressHUD'
+  
+  pod 'Alamofire'
+  
+  pod 'CodableAlamofire'
+  
+  pod "PromiseKit", "~> 6.8"
+  
+  pod 'PromiseKit/Alamofire'
 end

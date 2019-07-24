@@ -7,47 +7,141 @@
 //
 
 import UIKit
+import Alamofire
+import CodableAlamofire
+import PromiseKit
+import SVProgressHUD
 
-class LoginViewController : UIViewController {
+final class LoginViewController : UIViewController {
     
-    private var numberOfTaps = 0
+    @IBOutlet private weak var rememberMeButton: UIButton!
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView! {
-        didSet {
-            myActivityIndicator.startAnimating()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-               self.myActivityIndicator.stopAnimating()
-            }
-        }
-    }
+    private var loginCredentials: LoginData?
+    private var loginUser: User?
     
-    @IBOutlet weak var myButton: UIButton! {
-        didSet {
-            myButton.layer.cornerRadius = 20
-            myButton.frame.size = CGSize(width: 120.0, height: 60.0)
-            
-            myButton.setImage(UIImage(named: "Plus"), for: .normal)
-            myButton.setTitle("Increment!", for: .normal)
-            myButton.sizeToFit()
-        }
-    }
-    
-    @IBOutlet weak var myLabel: UILabel!  {
-        didSet {
-            myLabel.text = "\(numberOfTaps)"
-            myLabel.font = UIFont(name: "Verdana-BoldItalic", size: 45.0)
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .cyan
+        SVProgressHUD.setDefaultMaskType(.black)
     }
     
-    @IBAction func buttonPressed() {
-        print("It works!")
-        numberOfTaps += 1
-        myLabel.text = "\(numberOfTaps)"
-        myActivityIndicator.isAnimating ? myActivityIndicator.stopAnimating() : myActivityIndicator.startAnimating()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+    
+    
+    @IBAction private func logInButtonPressed(_ sender: Any) {
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+            else {
+                return
+                
+        }
+        _logInUserWith(email: email, password: password)
+        
+    }
+    
+    @IBAction private func createAccountButtonPressed(_ sender: Any) {
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty
+            else {
+                return
+        }
+        _registerUserWith(email: email, password: password)
+        
+    }
+    
+    @IBAction private func rememberMePressed() {
+        rememberMeButton.isSelected.toggle()
+    }
+    
+    
+    private func _navigateToHomeView() {
+        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        
+        homeViewController.loginCredentials = loginCredentials
+        homeViewController.loginUser = loginUser
+        
+        navigationController?.pushViewController(homeViewController, animated: true)
+    }
+    
+}
+
+// Provides the same API functionalities using Promises from PromiseKit
+extension LoginViewController {
+    
+    private func _registerUserWith(email: String, password: String) {
+        SVProgressHUD.show()
+        firstly { () -> Promise<User> in
+            return _sendAlamofireHTTPRequestTo(
+                  url: "https://api.infinum.academy/api/users"
+                , method: .post
+                , email: email
+                , password: password)
+            }.then { [weak self] (user: User) -> Promise<LoginData> in
+                guard let self = self else {
+                    return Promise(error: NSError())
+                }
+                self.loginUser = user
+                return self._sendAlamofireHTTPRequestTo(
+                      url:"https://api.infinum.academy/api/users/sessions"
+                    , method: .post
+                    , email: email
+                    , password: password)
+            }.done { [weak self] in
+                print("Success: \($0)")
+                guard let self = self else { return }
+                self._navigateToHomeView()
+            }.ensure {
+                SVProgressHUD.dismiss()
+            }.catch {
+                print("API failure: \($0)")
+        }
+    }
+    
+    private func _logInUserWith(email: String, password: String) {
+        SVProgressHUD.show()
+        firstly { () -> Promise<LoginData> in
+            _sendAlamofireHTTPRequestTo(
+                  url: "https://api.infinum.academy/api/users/sessions"
+                , method: .post
+                , email: email
+                , password: password)
+            }
+            .done { [weak self] in
+                guard let self = self else { return }
+                self.loginCredentials = $0
+                print("Success: \($0)")
+                self._navigateToHomeView()
+            }
+            .ensure {
+                SVProgressHUD.dismiss()
+            }.catch {
+                print("API failure: \($0)")
+        }
+    }
+    
+    private func _sendAlamofireHTTPRequestTo<T: Codable>(url: String, method: HTTPMethod, email: String, password: String) -> Promise<T>{
+        return Alamofire.request(
+            url,
+            method: method,
+            parameters: [
+                "email": email,
+                "password": password
+            ],
+            encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodable(T.self, keyPath: "data")
+    }
+
 }

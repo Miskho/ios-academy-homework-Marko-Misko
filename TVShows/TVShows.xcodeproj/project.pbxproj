@@ -10,9 +10,13 @@
 		1FC57B35C1F1C4862DEAACDA /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5106E84427A4EFACF0F4A188 /* Pods_TVShows.framework */; };
 		4204616622CE53DD00740601 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204616522CE53DD00740601 /* AppDelegate.swift */; };
 		4204616D22CE53DE00740601 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4204616C22CE53DE00740601 /* Assets.xcassets */; };
-		4226C4B722CF930D00E81E8C /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4226C4B622CF930D00E81E8C /* Login.storyboard */; };
 		4226C4B922CF934400E81E8C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4226C4B822CF934400E81E8C /* LoginViewController.swift */; };
 		4280CC8222DA4CDE00D621D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4280CC8022DA4CDE00D621D3 /* LaunchScreen.storyboard */; };
+		4280CC8522DCB63600D621D3 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4280CC8422DCB63600D621D3 /* Home.storyboard */; };
+		4280CC8722DCB66100D621D3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4280CC8622DCB66100D621D3 /* HomeViewController.swift */; };
+		4280CC8F22DDC58C00D621D3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4280CC8E22DDC58C00D621D3 /* User.swift */; };
+		42D4DA8E22E0983A0061591A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D4DA8D22E0983A0061591A /* Login.storyboard */; };
+		42D4DA9022E0BAF80061591A /* Alamofire+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D4DA8F22E0BAF80061591A /* Alamofire+PromiseKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,9 +25,13 @@
 		4204616522CE53DD00740601 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4204616C22CE53DE00740601 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4204617122CE53DE00740601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4226C4B622CF930D00E81E8C /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		4226C4B822CF934400E81E8C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4280CC8122DA4CDE00D621D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4280CC8422DCB63600D621D3 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		4280CC8622DCB66100D621D3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4280CC8E22DDC58C00D621D3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		42D4DA8D22E0983A0061591A /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		42D4DA8F22E0BAF80061591A /* Alamofire+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+PromiseKit.swift"; sourceTree = "<group>"; };
 		5106E84427A4EFACF0F4A188 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF0BD6EFA5870748A483CDD5 /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,7 +81,7 @@
 		4226C4B522CF92DE00E81E8C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				4226C4B622CF930D00E81E8C /* Login.storyboard */,
+				42D4DA8D22E0983A0061591A /* Login.storyboard */,
 				4226C4B822CF934400E81E8C /* LoginViewController.swift */,
 			);
 			path = Login;
@@ -90,6 +98,8 @@
 		4280CC7322DA46EE00D621D3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4280CC8D22DDC54500D621D3 /* Entities */,
+				4280CC8322DCB61C00D621D3 /* Home */,
 				4226C4B522CF92DE00E81E8C /* Login */,
 			);
 			path = Modules;
@@ -98,6 +108,7 @@
 		4280CC7422DA46F600D621D3 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				42D4DA8F22E0BAF80061591A /* Alamofire+PromiseKit.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -125,6 +136,23 @@
 				4280CC8022DA4CDE00D621D3 /* LaunchScreen.storyboard */,
 			);
 			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		4280CC8322DCB61C00D621D3 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4280CC8422DCB63600D621D3 /* Home.storyboard */,
+				4280CC8622DCB66100D621D3 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		4280CC8D22DDC54500D621D3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				4280CC8E22DDC58C00D621D3 /* User.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		6783DF55F76B3B3ABF71004B /* Pods */ = {
@@ -204,9 +232,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42D4DA8E22E0983A0061591A /* Login.storyboard in Resources */,
 				4280CC8222DA4CDE00D621D3 /* LaunchScreen.storyboard in Resources */,
 				4204616D22CE53DE00740601 /* Assets.xcassets in Resources */,
-				4226C4B722CF930D00E81E8C /* Login.storyboard in Resources */,
+				4280CC8522DCB63600D621D3 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +288,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4280CC8F22DDC58C00D621D3 /* User.swift in Sources */,
 				4226C4B922CF934400E81E8C /* LoginViewController.swift in Sources */,
 				4204616622CE53DD00740601 /* AppDelegate.swift in Sources */,
+				42D4DA9022E0BAF80061591A /* Alamofire+PromiseKit.swift in Sources */,
+				4280CC8722DCB66100D621D3 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -105,7 +105,7 @@ class ShowDetailsViewController: UIViewController {
     private func _navigateToNewEpisodeViewController() {
         let newEpisodeStoryboard = UIStoryboard(name: "NewEpisode", bundle: nil)
         let newEpisodeViewController = newEpisodeStoryboard.instantiateViewController(withIdentifier: "NewEpisodeViewController") as! NewEpisodeViewController
-        newEpisodeViewController.configureBeforeNavigating(with: show!, credentials: loginCredentials!)
+        newEpisodeViewController.configureBeforeNavigating(with: show!, credentials: loginCredentials!, delegate: self)
         
         let navigationController = UINavigationController(rootViewController:
             newEpisodeViewController)
@@ -150,7 +150,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EpisodeTableViewCell.self), for: indexPath) as! EpisodeTableViewCell
-            cell.configure(with: episodes[indexPath.row])
+            cell.configure(with: episodes[indexPath.row - 1])
             return cell
         }
     }

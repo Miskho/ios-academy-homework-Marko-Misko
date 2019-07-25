@@ -69,7 +69,7 @@ final class LoginViewController : UIViewController {
     private func _navigateToHomeView() {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        homeViewController.configureBeforeNavigating(with: loginUser!, credentials: loginCredentials!)
+        homeViewController.configureBeforeNavigating(with: loginCredentials!)
         navigationController?.setViewControllers([homeViewController], animated: true)
     }
     

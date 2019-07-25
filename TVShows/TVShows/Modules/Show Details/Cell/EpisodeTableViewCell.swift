@@ -10,10 +10,11 @@ import UIKit
 
 class EpisodeTableViewCell: UITableViewCell {
     
+    // MARK: - Outlets
     @IBOutlet private weak var seasonAndEpisodeLabel: UILabel!
     @IBOutlet private weak var episodeTitleLabel: UILabel!
     
-    
+    // MARK: - UITableViewCell methods
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -21,6 +22,7 @@ class EpisodeTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         episodeTitleLabel.text = nil
+        seasonAndEpisodeLabel.text = nil
     }
     
 }

@@ -20,7 +20,6 @@ final class HomeViewController: UIViewController {
     // MARK: - Properties
     private var tvShows = [TVShow]()
     private var loginCredentials: LoginData?
-    private var loginUser: User?
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
@@ -30,9 +29,8 @@ final class HomeViewController: UIViewController {
     }
     
     // MARK: - Public methods
-    func configureBeforeNavigating(with user: User, credentials: LoginData) {
+    func configureBeforeNavigating(with credentials: LoginData) {
         loginCredentials = credentials
-        loginUser = user
     }
     
     // MARK: - Private methods
@@ -81,6 +79,7 @@ extension HomeViewController: UITableViewDelegate {
         let showDetailsStoryboard = UIStoryboard(name: "ShowDetails", bundle: nil)
         let showDetailsViewController = showDetailsStoryboard.instantiateViewController(withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
         showDetailsViewController.configureBeforeNavigating(with: tvShows[indexPath.row], credentials: loginCredentials!)
+        
         navigationController?.pushViewController(showDetailsViewController, animated: true)
     }
     

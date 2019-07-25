@@ -58,9 +58,10 @@ class NewEpisodeViewController: UIViewController {
     }
     
     // MARK: - Public methods
-    func configureBeforeNavigating(with show: TVShow, credentials: LoginData) {
+    func configureBeforeNavigating(with show: TVShow, credentials: LoginData, delegate: NewEpisodeReloadTableViewDelegate) {
         loginCredentials = credentials
         self.show = show
+        newEpisodeDelegate = delegate
     }
     
     // MARK: - Private methods
@@ -82,7 +83,12 @@ class NewEpisodeViewController: UIViewController {
         guard let episodeTitle = episodeTitleTextField.text,
             let seasonNumber = seasonNumberTextField.text,
             let episodeNumber = episodeNumberTextField.text,
-            let episodeDescription = episodeDescriptionTextField.text else {
+            let episodeDescription = episodeDescriptionTextField.text,
+            !episodeTitle.isEmpty,
+            !seasonNumber.isEmpty,
+            !episodeNumber.isEmpty,
+            !episodeDescription.isEmpty
+            else {
                 _displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please provide all fields below for registering new episode.", preferredStyle: .alert))
                 return
         }
@@ -93,7 +99,7 @@ class NewEpisodeViewController: UIViewController {
                 method: .post,
                 parameters: [
                     "showId": show!.id,
-                    "mediaId": "s",
+                    "mediaId": "X",
                     "title": episodeTitle,
                     "description": episodeDescription,
                     "episodeNumber": episodeNumber,
@@ -105,6 +111,7 @@ class NewEpisodeViewController: UIViewController {
             .responseDecodable(Episode.self, keyPath: "data")
             .done { [weak self] _ in
                 self?.newEpisodeDelegate?.newEpisodeAdded()
+                self?._navigateToShowDetailsViewController()
             }.catch { [weak self] _ in
                 self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please check the validity of provided data for registering new episode.", preferredStyle: .alert))
         }

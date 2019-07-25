@@ -10,9 +10,10 @@ import UIKit
 
 class TVShowTableViewCell: UITableViewCell {
     
+    // MARK: - Outlets
     @IBOutlet private weak var titleLabel: UILabel!
 
-    
+    // MARK: - UITableViewCell methods
     override func awakeFromNib() {
         super.awakeFromNib()
     }

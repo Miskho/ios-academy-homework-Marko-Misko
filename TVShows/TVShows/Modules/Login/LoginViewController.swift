@@ -14,14 +14,16 @@ import SVProgressHUD
 
 final class LoginViewController : UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet private weak var rememberMeButton: UIButton!
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     
+    // MARK: - Properties
     private var loginCredentials: LoginData?
     private var loginUser: User?
     
-    
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         SVProgressHUD.setDefaultMaskType(.black)
@@ -31,7 +33,7 @@ final class LoginViewController : UIViewController {
         super.viewWillAppear(animated)
     }
     
-    
+    // MARK: - Outlet actions
     @IBAction private func logInButtonPressed(_ sender: Any) {
         guard
             let email = emailTextField.text,
@@ -63,14 +65,11 @@ final class LoginViewController : UIViewController {
         rememberMeButton.isSelected.toggle()
     }
     
-    
+    // MARK: - Private methods
     private func _navigateToHomeView() {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        
-        homeViewController.loginCredentials = loginCredentials
-        homeViewController.loginUser = loginUser
-        
+        homeViewController.configureBeforeNavigating(with: loginUser!, credentials: loginCredentials!)
         navigationController?.setViewControllers([homeViewController], animated: true)
     }
     
@@ -85,7 +84,7 @@ final class LoginViewController : UIViewController {
     
 }
 
-// Provides the same API functionalities using Promises from PromiseKit
+// Provides API functionalities using Promises from PromiseKit
 extension LoginViewController {
     
     private func _registerUserWith(email: String, password: String) {

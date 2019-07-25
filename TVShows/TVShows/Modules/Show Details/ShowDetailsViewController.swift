@@ -14,21 +14,23 @@ import SVProgressHUD
 
 class ShowDetailsViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet private weak var episodesTableView: UITableView!
     
-    var show: TVShow?
-    var loginCredentials: LoginData?
+    // MARK: - Properties
+    private var show: TVShow?
+    private var loginCredentials: LoginData?
     private var showDetails: ShowDetails?
     private var episodes = [Episode]()
     
-    
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
         _setupShowDetailsViewController()
     }
     
-    
+    // MARK: - Outlet actions
     @IBAction func backToHomeButtonPressed(_ sender: Any) {
         _navigateToHomeViewController()
     }
@@ -37,7 +39,13 @@ class ShowDetailsViewController: UIViewController {
         _navigateToNewEpisodeViewController()
     }
     
+    // MARK: - Public methods
+    func configureBeforeNavigating(with show: TVShow, credentials: LoginData) {
+        loginCredentials = credentials
+        self.show = show
+    }
     
+    // MARK: - Private methods
     private func _setupShowDetailsViewController() {
         SVProgressHUD.show()
         
@@ -97,8 +105,7 @@ class ShowDetailsViewController: UIViewController {
     private func _navigateToNewEpisodeViewController() {
         let newEpisodeStoryboard = UIStoryboard(name: "NewEpisode", bundle: nil)
         let newEpisodeViewController = newEpisodeStoryboard.instantiateViewController(withIdentifier: "NewEpisodeViewController") as! NewEpisodeViewController
-        newEpisodeViewController.loginCredentials = loginCredentials
-        newEpisodeViewController.show = show
+        newEpisodeViewController.configureBeforeNavigating(with: show!, credentials: loginCredentials!)
         
         let navigationController = UINavigationController(rootViewController:
             newEpisodeViewController)

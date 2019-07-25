@@ -18,21 +18,23 @@ protocol NewEpisodeReloadTableViewDelegate: class {
 
 class NewEpisodeViewController: UIViewController {
     
-    @IBOutlet weak var episodeTitleTextField: UITextField!
-    @IBOutlet weak var seasonNumberTextField: UITextField!
-    @IBOutlet weak var episodeNumberTextField: UITextField!
-    @IBOutlet weak var episodeDescriptionTextField: UITextField!
-    @IBOutlet weak var episodeImage: UIImageView!
+    // MARK: - Outlets
+    @IBOutlet private weak var episodeTitleTextField: UITextField!
+    @IBOutlet private weak var seasonNumberTextField: UITextField!
+    @IBOutlet private weak var episodeNumberTextField: UITextField!
+    @IBOutlet private weak var episodeDescriptionTextField: UITextField!
+    @IBOutlet private weak var episodeImage: UIImageView!
     
-    weak var newEpisodeDelegate: NewEpisodeReloadTableViewDelegate?
-    var loginCredentials: LoginData?
-    var show: TVShow?
-    var episodeTitle: String?
-    var seasonNumber: String?
-    var episodeNumber: String?
-    var episodeDescription: String?
+    // MARK: - Properties
+    private weak var newEpisodeDelegate: NewEpisodeReloadTableViewDelegate?
+    private var loginCredentials: LoginData?
+    private var show: TVShow?
+    private var episodeTitle: String?
+    private var seasonNumber: String?
+    private var episodeNumber: String?
+    private var episodeDescription: String?
     
-    
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.title = "Add episode"
@@ -55,14 +57,20 @@ class NewEpisodeViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = pink
     }
     
-    @objc func didSelectAddShow() {
+    // MARK: - Public methods
+    func configureBeforeNavigating(with show: TVShow, credentials: LoginData) {
+        loginCredentials = credentials
+        self.show = show
+    }
+    
+    // MARK: - Private methods
+    @objc private func didSelectAddShow() {
         _registerNewEpisode()
     }
     
-    @objc func didSelectCancel() {
+    @objc private func didSelectCancel() {
         _navigateToShowDetailsViewController()
     }
-    
     
     private func _navigateToShowDetailsViewController() {
         navigationController?.dismiss(animated: true, completion: nil)
@@ -114,6 +122,7 @@ class NewEpisodeViewController: UIViewController {
     
 }
 
+// MARK: - UIColor extension for creating colors using hexadecimal notation
 extension UIColor {
     
     convenience init(red: Int, green: Int, blue: Int) {

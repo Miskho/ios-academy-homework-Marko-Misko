@@ -14,21 +14,29 @@ import SVProgressHUD
 
 final class HomeViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet private weak var tableView: UITableView!
     
+    // MARK: - Properties
     private var tvShows = [TVShow]()
+    private var loginCredentials: LoginData?
+    private var loginUser: User?
     
-    var loginCredentials: LoginData?
-    var loginUser: User?
-    
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         _setupTableView()
         _displayTVShows()
     }
     
+    // MARK: - Public methods
+    func configureBeforeNavigating(with user: User, credentials: LoginData) {
+        loginCredentials = credentials
+        loginUser = user
+    }
     
-    func _setupTableView() {
+    // MARK: - Private methods
+    private func _setupTableView() {
         tableView.estimatedRowHeight = 110
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
@@ -36,7 +44,7 @@ final class HomeViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
+
     // Side effect: assigns the data fetched via API call to the property
     // tvShows, effectively causing the tableView to be reloaded
     private func _displayTVShows() {
@@ -72,9 +80,7 @@ extension HomeViewController: UITableViewDelegate {
         
         let showDetailsStoryboard = UIStoryboard(name: "ShowDetails", bundle: nil)
         let showDetailsViewController = showDetailsStoryboard.instantiateViewController(withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
-        showDetailsViewController.show = tvShows[indexPath.row]
-        showDetailsViewController.loginCredentials = loginCredentials
-        
+        showDetailsViewController.configureBeforeNavigating(with: tvShows[indexPath.row], credentials: loginCredentials!)
         navigationController?.pushViewController(showDetailsViewController, animated: true)
     }
     

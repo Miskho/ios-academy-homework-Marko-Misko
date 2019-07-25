@@ -24,12 +24,25 @@ class ShowDetailsViewController: UIViewController {
     var loginCredentials: LoginData?
     private var showDetails: ShowDetails?
     private var episodes = [Episode]()
+    private var gradient: CAGradientLayer!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.setNavigationBarHidden(true, animated: true)
         _setupShowDetailsViewController()
+        
+        gradient = CAGradientLayer()
+        gradient.frame = showImage.bounds
+        gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
+        gradient.locations = [0.2, 0.9, 1]
+        showImage.layer.mask = gradient
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradient.frame = showImage.bounds
     }
     
     @IBAction func backToHomeButtonPressed(_ sender: Any) {

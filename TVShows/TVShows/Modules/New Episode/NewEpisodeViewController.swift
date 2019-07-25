@@ -76,7 +76,6 @@ class NewEpisodeViewController: UIViewController {
             let episodeNumber = episodeNumberTextField.text,
             let episodeDescription = episodeDescriptionTextField.text else {
                 _displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please provide all fields below for registering new episode.", preferredStyle: .alert))
-                // _displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please check the validity of provided data for registering new episode.", preferredStyle: .alert))
                 return
         }
         
@@ -95,6 +94,12 @@ class NewEpisodeViewController: UIViewController {
                 encoding: JSONEncoding.default,
                 headers: headers
             ).validate()
+            .responseDecodable(Episode.self, keyPath: "data")
+            .done { [weak self] _ in
+                self?.newEpisodeDelegate?.newEpisodeAdded()
+            }.catch { [weak self] _ in
+                self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please check the validity of provided data for registering new episode.", preferredStyle: .alert))
+        }
         
     }
     

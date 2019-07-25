@@ -71,16 +71,15 @@ final class LoginViewController : UIViewController {
         homeViewController.loginCredentials = loginCredentials
         homeViewController.loginUser = loginUser
         
-        navigationController?.pushViewController(homeViewController, animated: true)
+        navigationController?.setViewControllers([homeViewController], animated: true)
     }
     
-    private func  _displayLoginFailedAlert() {
-        let alertController = UIAlertController(title: "Could not log in with provided credentials", message: "Please register yourself or check if the email and password you have provided are valid ones.", preferredStyle: .alert)
-        
+    private func _displaySimpleDisposableAlertUsing(_ alertController: UIAlertController) {
         let OKAction = UIAlertAction(title: "Ok", style: .default) { _ in
             alertController.dismiss(animated: true, completion: nil)
         }
         alertController.addAction(OKAction)
+        
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -113,7 +112,8 @@ extension LoginViewController {
                 self._navigateToHomeView()
             }.ensure {
                 SVProgressHUD.dismiss()
-            }.catch {
+            }.catch { [weak self] in
+                self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not register in with provided credentials", message: "Please check if the email and password you have provided are valid ones.", preferredStyle: .alert))
                 print("API failure: \($0)")
         }
     }
@@ -135,7 +135,8 @@ extension LoginViewController {
             }
             .ensure {
                 SVProgressHUD.dismiss()
-            }.catch {
+            }.catch { [weak self] in
+                self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not log in with provided credentials", message: "Please register yourself or check if the email and password you have provided are valid ones.", preferredStyle: .alert))
                 print("API failure: \($0)")
         }
     }

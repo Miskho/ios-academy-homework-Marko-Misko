@@ -26,6 +26,7 @@
 		42850F8C22E751FE0052F05F /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42850F8B22E751FE0052F05F /* EpisodeTableViewCell.swift */; };
 		42D4DA8E22E0983A0061591A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D4DA8D22E0983A0061591A /* Login.storyboard */; };
 		42D4DA9022E0BAF80061591A /* Alamofire+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D4DA8F22E0BAF80061591A /* Alamofire+PromiseKit.swift */; };
+		42EFEC8122E9DE6E004618B4 /* ShowInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFEC8022E9DE6E004618B4 /* ShowInfoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		42850F8B22E751FE0052F05F /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		42D4DA8D22E0983A0061591A /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		42D4DA8F22E0BAF80061591A /* Alamofire+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+PromiseKit.swift"; sourceTree = "<group>"; };
+		42EFEC8022E9DE6E004618B4 /* ShowInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInfoTableViewCell.swift; sourceTree = "<group>"; };
 		5106E84427A4EFACF0F4A188 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF0BD6EFA5870748A483CDD5 /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				42850F8B22E751FE0052F05F /* EpisodeTableViewCell.swift */,
+				42EFEC8022E9DE6E004618B4 /* ShowInfoTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				426B35B822E7140F0066003A /* ShowDetailsViewController.swift in Sources */,
+				42EFEC8122E9DE6E004618B4 /* ShowInfoTableViewCell.swift in Sources */,
 				426B35C122E7397E0066003A /* NewEpisodeViewController.swift in Sources */,
 				426B35BE22E7389E0066003A /* ShowDetails.swift in Sources */,
 				4280CC8F22DDC58C00D621D3 /* User.swift in Sources */,

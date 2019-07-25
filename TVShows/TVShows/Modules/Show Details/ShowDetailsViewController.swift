@@ -14,36 +14,20 @@ import SVProgressHUD
 
 class ShowDetailsViewController: UIViewController {
     
-    @IBOutlet private weak var showTitleLabel: UILabel!
-    @IBOutlet private weak var showDescriptionLabel: UILabel!
-    @IBOutlet private weak var episodeCountLabel: UILabel!
-    @IBOutlet private weak var showImage: UIImageView!
     @IBOutlet private weak var episodesTableView: UITableView!
     
     var show: TVShow?
     var loginCredentials: LoginData?
     private var showDetails: ShowDetails?
     private var episodes = [Episode]()
-    private var gradient: CAGradientLayer!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.setNavigationBarHidden(true, animated: true)
         _setupShowDetailsViewController()
-        
-        gradient = CAGradientLayer()
-        gradient.frame = showImage.bounds
-        gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
-        gradient.locations = [0.2, 0.9, 1]
-        showImage.layer.mask = gradient
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        gradient.frame = showImage.bounds
-    }
     
     @IBAction func backToHomeButtonPressed(_ sender: Any) {
         _navigateToHomeViewController()
@@ -97,9 +81,6 @@ class ShowDetailsViewController: UIViewController {
     }
     
     private func _displayShowDetails() {
-        showTitleLabel.text = show?.title
-        showDescriptionLabel.text = showDetails?.description
-        episodeCountLabel.text = String(describing: episodes.count)
         _setupTableView()
         episodesTableView.reloadData()
     }
@@ -143,7 +124,7 @@ extension ShowDetailsViewController: UITableViewDelegate {
             self.episodes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-    
+        
         return [delete]
     }
 }
@@ -152,18 +133,23 @@ extension ShowDetailsViewController: UITableViewDelegate {
 extension ShowDetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return episodes.count
+        return episodes.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EpisodeTableViewCell.self), for: indexPath) as! EpisodeTableViewCell
-        
-        cell.configure(with: episodes[indexPath.row])
-        return cell
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ShowInfoTableViewCell.self), for: indexPath) as! ShowInfoTableViewCell
+            cell.configure(with: showDetails!, episodesCount: episodes.count)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EpisodeTableViewCell.self), for: indexPath) as! EpisodeTableViewCell
+            cell.configure(with: episodes[indexPath.row])
+            return cell
+        }
     }
     
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        return false
     }
     
 }

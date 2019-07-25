@@ -29,7 +29,6 @@ final class LoginViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     
@@ -75,6 +74,16 @@ final class LoginViewController : UIViewController {
         navigationController?.pushViewController(homeViewController, animated: true)
     }
     
+    private func  _displayLoginFailedAlert() {
+        let alertController = UIAlertController(title: "Could not log in with provided credentials", message: "Please register yourself or check if the email and password you have provided are valid ones.", preferredStyle: .alert)
+        
+        let OKAction = UIAlertAction(title: "Ok", style: .default) { _ in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
 }
 
 // Provides the same API functionalities using Promises from PromiseKit
@@ -84,7 +93,7 @@ extension LoginViewController {
         SVProgressHUD.show()
         firstly { () -> Promise<User> in
             return _sendAlamofireHTTPRequestTo(
-                  url: "https://api.infinum.academy/api/users"
+                "https://api.infinum.academy/api/users"
                 , method: .post
                 , email: email
                 , password: password)
@@ -94,7 +103,7 @@ extension LoginViewController {
                 }
                 self.loginUser = user
                 return self._sendAlamofireHTTPRequestTo(
-                      url:"https://api.infinum.academy/api/users/sessions"
+                    "https://api.infinum.academy/api/users/sessions"
                     , method: .post
                     , email: email
                     , password: password)
@@ -113,7 +122,7 @@ extension LoginViewController {
         SVProgressHUD.show()
         firstly { () -> Promise<LoginData> in
             _sendAlamofireHTTPRequestTo(
-                  url: "https://api.infinum.academy/api/users/sessions"
+                "https://api.infinum.academy/api/users/sessions"
                 , method: .post
                 , email: email
                 , password: password)
@@ -131,7 +140,7 @@ extension LoginViewController {
         }
     }
     
-    private func _sendAlamofireHTTPRequestTo<T: Codable>(url: String, method: HTTPMethod, email: String, password: String) -> Promise<T>{
+    private func _sendAlamofireHTTPRequestTo<T: Codable>(_ url: String, method: HTTPMethod, email: String, password: String) -> Promise<T>{
         return Alamofire.request(
             url,
             method: method,
@@ -143,5 +152,4 @@ extension LoginViewController {
             .validate()
             .responseDecodable(T.self, keyPath: "data")
     }
-
 }

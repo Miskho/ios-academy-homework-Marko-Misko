@@ -31,7 +31,7 @@ class ShowInfoTableViewCell: UITableViewCell {
         gradient = CAGradientLayer()
         gradient.frame = showImage.bounds
         gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
-        gradient.locations = [0.2, 0.9, 1]
+        gradient.locations = [0.1, 0.9, 1]
         showImage.layer.mask = gradient
     }
     
@@ -49,7 +49,7 @@ class ShowInfoTableViewCell: UITableViewCell {
 extension ShowInfoTableViewCell {
     
     func configure(with details: ShowDetails, episodesCount: Int) {
-        showImage.image = UIImage(named: "Office")
+        showImage.image = UIImage(named: "OfficeLogo")
         showTitleLabel.text = details.title
         showDescriptionLabel.text = details.description
         episodeCountLabel.text = String(episodesCount)

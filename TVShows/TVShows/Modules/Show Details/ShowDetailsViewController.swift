@@ -97,6 +97,7 @@ class ShowDetailsViewController: UIViewController {
         episodesTableView.estimatedRowHeight = 110
         episodesTableView.rowHeight = UITableView.automaticDimension
         episodesTableView.tableFooterView = UIView()
+        episodesTableView.allowsSelection = false
         
         episodesTableView.delegate = self
         episodesTableView.dataSource = self

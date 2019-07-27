@@ -11,6 +11,7 @@ import Alamofire
 import CodableAlamofire
 import PromiseKit
 import SVProgressHUD
+import Kingfisher
 
 final class HomeViewController: UIViewController {
     

@@ -181,6 +181,8 @@
                     <navigationItem key="navigationItem" id="Bbl-aV-fA5"/>
                     <connections>
                         <outlet property="emailTextField" destination="h83-UI-V4Z" id="flr-TB-KY4"/>
+                        <outlet property="loginButton" destination="40C-Tb-wda" id="KVh-Uh-0qj"/>
+                        <outlet property="logoImage" destination="CYG-Bs-uI3" id="2qZ-GD-haR"/>
                         <outlet property="passwordTextField" destination="XQB-Q7-wUs" id="OCD-JV-8F9"/>
                         <outlet property="rememberMeButton" destination="lKn-Se-UIJ" id="6am-Ch-Txq"/>
                         <outlet property="view" destination="APe-NI-6iQ" id="J4c-bS-GzR"/>

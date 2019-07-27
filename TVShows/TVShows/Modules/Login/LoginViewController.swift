@@ -15,6 +15,8 @@ import SVProgressHUD
 final class LoginViewController : UIViewController {
     
     // MARK: - Outlets
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet private weak var rememberMeButton: UIButton!
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
@@ -27,6 +29,7 @@ final class LoginViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         SVProgressHUD.setDefaultMaskType(.black)
+        _scaleLogoImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,13 +76,59 @@ final class LoginViewController : UIViewController {
         navigationController?.setViewControllers([homeViewController], animated: true)
     }
     
-    private func _displaySimpleDisposableAlertUsing(_ alertController: UIAlertController) {
+    private func _displaySimpleDisposableAlertUsing(_ alertController: UIAlertController, onPressingOk: (() -> ())? = nil) {
         let OKAction = UIAlertAction(title: "Ok", style: .default) { _ in
             alertController.dismiss(animated: true, completion: nil)
+            if let handler = onPressingOk {
+                handler()
+            }
         }
         alertController.addAction(OKAction)
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func _pulsateLoginButton() {
+        let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+        pulseAnimation.duration = 0.05
+        pulseAnimation.fromValue = 0.9
+        pulseAnimation.toValue = 1.1
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        pulseAnimation.autoreverses = false
+        pulseAnimation.repeatCount = 2
+        
+        loginButton.layer.add(pulseAnimation, forKey: "scale")
+    }
+    
+    private func _shakeTextField(_ textField: UITextField) {
+        let animation = CABasicAnimation(keyPath: "position");
+        animation.fromValue = textField.layer.position
+        animation.toValue = CGPoint(x: textField.layer.position.x, y: textField.layer.position.y - 10)
+        animation.duration = 0.1
+        animation.repeatCount = Float.greatestFiniteMagnitude
+        animation.autoreverses = false
+        
+        textField.layer.add(animation, forKey: "animatePosition")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak textField] in
+            textField?.layer.removeAnimation(forKey: "animatePosition")
+        }
+    }
+    
+    private func _shakeEmailAndPasswordTextFields() {
+        _shakeTextField(emailTextField)
+        _shakeTextField(passwordTextField)
+    }
+    
+    private func _scaleLogoImage() {
+        let pulseAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
+        pulseAnimation.duration = 1.0
+        pulseAnimation.fromValue = 0.0
+        pulseAnimation.toValue = 1.0
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        pulseAnimation.autoreverses = false
+        pulseAnimation.repeatCount = 1
+        
+        logoImage.layer.add(pulseAnimation, forKey: "scale")
     }
     
 }
@@ -112,7 +161,7 @@ extension LoginViewController {
             }.ensure {
                 SVProgressHUD.dismiss()
             }.catch { [weak self] in
-                self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not register in with provided credentials", message: "Please check if the email and password you have provided are valid ones.", preferredStyle: .alert))
+                self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not register in with provided credentials", message: "Please check if the email and password you have provided are valid ones.", preferredStyle: .alert), onPressingOk: self?._shakeEmailAndPasswordTextFields)
                 print("API failure: \($0)")
         }
     }
@@ -135,8 +184,8 @@ extension LoginViewController {
             .ensure {
                 SVProgressHUD.dismiss()
             }.catch { [weak self] in
-                self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not log in with provided credentials", message: "Please register yourself or check if the email and password you have provided are valid ones.", preferredStyle: .alert))
-                print("API failure: \($0)")
+                self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not log in with provided credentials", message: "Please register yourself or check if the email and password you have provided are valid ones.", preferredStyle: .alert), onPressingOk: self?._pulsateLoginButton)
+                print("API failure: \($0)") 
         }
     }
     

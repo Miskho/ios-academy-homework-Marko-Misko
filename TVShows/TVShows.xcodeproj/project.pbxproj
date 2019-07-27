@@ -27,6 +27,7 @@
 		42D4DA8E22E0983A0061591A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D4DA8D22E0983A0061591A /* Login.storyboard */; };
 		42D4DA9022E0BAF80061591A /* Alamofire+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D4DA8F22E0BAF80061591A /* Alamofire+PromiseKit.swift */; };
 		42EFEC8122E9DE6E004618B4 /* ShowInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFEC8022E9DE6E004618B4 /* ShowInfoTableViewCell.swift */; };
+		42F163E522ECCFC900E345C9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F163E422ECCFC900E345C9 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		42D4DA8D22E0983A0061591A /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		42D4DA8F22E0BAF80061591A /* Alamofire+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+PromiseKit.swift"; sourceTree = "<group>"; };
 		42EFEC8022E9DE6E004618B4 /* ShowInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInfoTableViewCell.swift; sourceTree = "<group>"; };
+		42F163E422ECCFC900E345C9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5106E84427A4EFACF0F4A188 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF0BD6EFA5870748A483CDD5 /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				42D4DA8F22E0BAF80061591A /* Alamofire+PromiseKit.swift */,
+				42F163E422ECCFC900E345C9 /* Constants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				426B35B222E4D2C20066003A /* TVShow.swift in Sources */,
 				4204616622CE53DD00740601 /* AppDelegate.swift in Sources */,
 				42850F8C22E751FE0052F05F /* EpisodeTableViewCell.swift in Sources */,
+				42F163E522ECCFC900E345C9 /* Constants.swift in Sources */,
 				42D4DA9022E0BAF80061591A /* Alamofire+PromiseKit.swift in Sources */,
 				4280CC8722DCB66100D621D3 /* HomeViewController.swift in Sources */,
 			);

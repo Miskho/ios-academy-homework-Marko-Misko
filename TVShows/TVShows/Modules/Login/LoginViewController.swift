@@ -34,6 +34,16 @@ final class LoginViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.rememberMePressed.rawValue) {
+            guard
+                let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.rememberedUser.rawValue),
+                let rememberedUser = try? PropertyListDecoder().decode(RememberedUser.self, from: data)
+                else {
+                    return
+            }
+            _logInUserWith(email: rememberedUser.email, password: rememberedUser.password)
+        }
     }
     
     // MARK: - Outlet actions
@@ -45,10 +55,8 @@ final class LoginViewController : UIViewController {
             !password.isEmpty
             else {
                 return
-                
         }
         _logInUserWith(email: email, password: password)
-        
     }
     
     @IBAction private func createAccountButtonPressed(_ sender: Any) {
@@ -61,7 +69,6 @@ final class LoginViewController : UIViewController {
                 return
         }
         _registerUserWith(email: email, password: password)
-        
     }
     
     @IBAction private func rememberMePressed() {
@@ -73,6 +80,7 @@ final class LoginViewController : UIViewController {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         homeViewController.configureBeforeNavigating(with: loginCredentials!)
+        
         navigationController?.setViewControllers([homeViewController], animated: true)
     }
     
@@ -131,6 +139,13 @@ final class LoginViewController : UIViewController {
         logoImage.layer.add(pulseAnimation, forKey: "scale")
     }
     
+    private func _rememberUserToUserDefaults(_ user: RememberedUser) {
+        if rememberMeButton.isSelected {
+            UserDefaults.standard.set(true, forKey: UserDefaultsKeys.rememberMePressed.rawValue)
+            UserDefaults.standard.set(try? PropertyListEncoder().encode(user), forKey: UserDefaultsKeys.rememberedUser.rawValue)
+        }
+    }
+    
 }
 
 // Provides API functionalities using Promises from PromiseKit
@@ -179,6 +194,7 @@ extension LoginViewController {
                 guard let self = self else { return }
                 self.loginCredentials = $0
                 print("Success: \($0)")
+                self._rememberUserToUserDefaults(RememberedUser(email: email, password: password))
                 self._navigateToHomeView()
             }
             .ensure {

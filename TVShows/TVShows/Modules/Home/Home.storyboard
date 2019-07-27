@@ -30,13 +30,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="LTI-Iq-nda">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="99.5"/>
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="200"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kwo-7b-vhb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="177" height="99.5"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kwo-7b-vhb">
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="200" id="Dhf-KQ-K4I"/>
+                                                                <constraint firstAttribute="width" constant="150" id="dQR-Fu-b3t"/>
+                                                            </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRh-PF-K2p">
-                                                            <rect key="frame" x="197" y="0.0" width="177" height="99.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRh-PF-K2p">
+                                                            <rect key="frame" x="170" y="0.0" width="204" height="200"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -51,7 +55,6 @@
                                             <constraints>
                                                 <constraint firstItem="LTI-Iq-nda" firstAttribute="leading" secondItem="pUY-h8-m0C" secondAttribute="leading" constant="20" id="7JA-FK-gn2"/>
                                                 <constraint firstAttribute="trailing" secondItem="LTI-Iq-nda" secondAttribute="trailing" constant="20" id="ItC-Nv-R1E"/>
-                                                <constraint firstAttribute="bottom" secondItem="LTI-Iq-nda" secondAttribute="bottom" id="atE-eI-Gl2"/>
                                                 <constraint firstItem="LTI-Iq-nda" firstAttribute="top" secondItem="pUY-h8-m0C" secondAttribute="top" id="dZQ-7h-Xzm"/>
                                             </constraints>
                                         </tableViewCellContentView>

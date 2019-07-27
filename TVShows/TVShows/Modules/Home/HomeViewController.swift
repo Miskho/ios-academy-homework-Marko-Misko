@@ -27,6 +27,12 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         _setupTableView()
         _displayTVShows()
+        
+        let logoutItem = UIBarButtonItem.init(image: UIImage(named: "ic-logout"),
+            style: .plain,
+            target: self,
+            action: #selector(logoutActionHandler))
+        navigationItem.leftBarButtonItem = logoutItem
     }
     
     // MARK: - Public methods
@@ -35,6 +41,19 @@ final class HomeViewController: UIViewController {
     }
     
     // MARK: - Private methods
+    @objc private func logoutActionHandler() {
+        _deleteUserFromUserDefaults()
+        
+        let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        let loginViewController = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        navigationController?.setViewControllers([loginViewController], animated: true)
+    }
+    
+    private func _deleteUserFromUserDefaults() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberMePressed.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberedUser.rawValue)
+    }
+    
     private func _setupTableView() {
         tableView.estimatedRowHeight = 110
         tableView.rowHeight = UITableView.automaticDimension

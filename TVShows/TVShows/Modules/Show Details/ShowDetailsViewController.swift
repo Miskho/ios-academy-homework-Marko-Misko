@@ -114,6 +114,7 @@ class ShowDetailsViewController: UIViewController {
     }
     
     private func _navigateToHomeViewController() {
+        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.popViewController(animated: true)
     }
     

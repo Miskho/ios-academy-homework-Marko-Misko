@@ -15,4 +15,6 @@ target 'TVShows' do
   pod "PromiseKit", "~> 6.8"
   
   pod 'PromiseKit/Alamofire'
+  
+  pod 'Kingfisher', '~> 5.0'
 end

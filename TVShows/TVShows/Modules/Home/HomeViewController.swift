@@ -18,10 +18,14 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     // MARK: - Properties
+    private let listIcon = UIImage(named: "ic-listview")
+    private let gridIcon = UIImage(named: "ic-gridview")
     private var tvShows = [TVShow]()
     private var loginCredentials: LoginData?
+    private var listLayout = true
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
@@ -34,6 +38,12 @@ final class HomeViewController: UIViewController {
             target: self,
             action: #selector(logoutActionHandler))
         navigationItem.leftBarButtonItem = logoutItem
+        
+        let changeLayoutItem = UIBarButtonItem.init(image: UIImage(named: "ic-gridview"),
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(changeLayoutActionHandler))
+        navigationItem.rightBarButtonItem = changeLayoutItem
     }
     
     // MARK: - Public methods
@@ -49,6 +59,14 @@ final class HomeViewController: UIViewController {
         let loginViewController = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         navigationController?.setViewControllers([loginViewController], animated: true)
     }
+    
+    @objc private func changeLayoutActionHandler() {
+        listLayout.toggle()
+        navigationItem.rightBarButtonItem?.image = listLayout ? gridIcon : listIcon
+        tableView.isHidden = !listLayout
+        collectionView.isHidden = listLayout
+    }
+
     
     private func _deleteUserFromPersistance() {
         UserDefaults.standard.removeObject(forKey: UserDefaultsConstants.Keys.rememberMePressed.rawValue)
@@ -66,6 +84,11 @@ final class HomeViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func _setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
 
     // Side effect: assigns the data fetched via API call to the property
@@ -135,4 +158,33 @@ extension HomeViewController: UITableViewDataSource {
         return true
     }
     
+}
+
+extension HomeViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let showDetailsStoryboard = UIStoryboard(name: "ShowDetails", bundle: nil)
+        let showDetailsViewController = showDetailsStoryboard.instantiateViewController(withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
+        showDetailsViewController.configureBeforeNavigating(with: tvShows[indexPath.row], credentials: loginCredentials!)
+        
+        navigationController?.pushViewController(showDetailsViewController, animated: true)
+    }
+    
+}
+
+extension HomeViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tvShows.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TVShowCollectionViewCell.self), for: indexPath) as! TVShowCollectionViewCell
+        
+        cell.configure(with: tvShows[indexPath.row])
+        return cell
+    }
+
 }

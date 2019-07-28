@@ -147,12 +147,12 @@ final class LoginViewController : UIViewController {
             UserDefaults.standard.set(true, forKey: UserDefaultsConstants.Keys.rememberMePressed.rawValue)
             UserDefaults.standard.set(encoded, forKey: UserDefaultsConstants.Keys.rememberedUser.rawValue)
         }
-//        let keychain = Keychain(service: KeychainConstants.keychainName.rawValue)
-//        if rememberMeButton.isSelected,
-//            let encoded = try? PropertyListEncoder().encode(user) {
-//            keychain[KeychainConstants.Keys.rememberMePressed.rawValue] = String(true)
-//            keychain[data: KeychainConstants.Keys.rememberedUser.rawValue] = encoded
-//        }
+        //        let keychain = Keychain(service: KeychainConstants.keychainName.rawValue)
+        //        if rememberMeButton.isSelected,
+        //            let encoded = try? PropertyListEncoder().encode(user) {
+        //            keychain[KeychainConstants.Keys.rememberMePressed.rawValue] = String(true)
+        //            keychain[data: KeychainConstants.Keys.rememberedUser.rawValue] = encoded
+        //        }
     }
     
 }

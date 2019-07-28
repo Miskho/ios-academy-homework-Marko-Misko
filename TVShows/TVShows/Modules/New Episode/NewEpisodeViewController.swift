@@ -55,6 +55,7 @@ class NewEpisodeViewController: UIViewController {
         let pink = UIColor(rgb: 0xFF758C)
         navigationItem.leftBarButtonItem?.tintColor = pink
         navigationItem.rightBarButtonItem?.tintColor = pink
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     // MARK: - Public methods
@@ -73,7 +74,7 @@ class NewEpisodeViewController: UIViewController {
         _navigateToShowDetailsViewController()
     }
     
-    private func _navigateToShowDetailsViewController() {
+    private func _navigateToShowDetailsViewController() {        navigationController?.setNavigationBarHidden(true, animated: true)
         navigationController?.dismiss(animated: true, completion: nil)
     }
     

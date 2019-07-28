@@ -16,7 +16,7 @@ protocol NewEpisodeReloadTableViewDelegate: class {
     func newEpisodeAdded()
 }
 
-class NewEpisodeViewController: UIViewController {
+class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate {
     
     // MARK: - Outlets
     @IBOutlet private weak var episodeTitleTextField: UITextField!
@@ -29,10 +29,7 @@ class NewEpisodeViewController: UIViewController {
     private weak var newEpisodeDelegate: NewEpisodeReloadTableViewDelegate?
     private var loginCredentials: LoginData?
     private var show: TVShow?
-    private var episodeTitle: String?
-    private var seasonNumber: String?
-    private var episodeNumber: String?
-    private var episodeDescription: String?
+    private let imagePicker = UIImagePickerController()
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
@@ -56,8 +53,18 @@ class NewEpisodeViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = pink
         navigationItem.rightBarButtonItem?.tintColor = pink
         navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        imagePicker.delegate = self
     }
     
+    // MARK: - IB Actions
+    @IBAction func loadImageButtonTapped(_ sender: UIButton) {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+
     // MARK: - Public methods
     func configureBeforeNavigating(with show: TVShow, credentials: LoginData, delegate: NewEpisodeReloadTableViewDelegate) {
         loginCredentials = credentials
@@ -126,6 +133,24 @@ class NewEpisodeViewController: UIViewController {
         alertController.addAction(OKAction)
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: - UIImagePickerControllerDelegate Methods
+extension NewEpisodeViewController: UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            episodeImage.contentMode = .scaleAspectFit
+            episodeImage.image = pickedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
 }

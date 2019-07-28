@@ -12,6 +12,7 @@ import CodableAlamofire
 import PromiseKit
 import SVProgressHUD
 import Kingfisher
+import KeychainAccess
 
 final class HomeViewController: UIViewController {
     
@@ -42,16 +43,20 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Private methods
     @objc private func logoutActionHandler() {
-        _deleteUserFromUserDefaults()
+        _deleteUserFromPersistance()
         
         let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
         let loginViewController = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         navigationController?.setViewControllers([loginViewController], animated: true)
     }
     
-    private func _deleteUserFromUserDefaults() {
-        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberMePressed.rawValue)
-        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberedUser.rawValue)
+    private func _deleteUserFromPersistance() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultsConstants.Keys.rememberMePressed.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultsConstants.Keys.rememberedUser.rawValue)
+
+//        let keychain = Keychain(service: KeychainConstants.keychainName.rawValue)
+//        keychain[KeychainConstants.Keys.rememberMePressed.rawValue] = nil
+//        keychain[KeychainConstants.Keys.rememberedUser.rawValue] = nil
     }
     
     private func _setupTableView() {

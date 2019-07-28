@@ -8,7 +8,19 @@
 
 import Foundation
 
-enum UserDefaultsKeys: String {
-    case rememberMePressed
-    case rememberedUser
+enum UserDefaultsConstants {
+    
+    enum Keys: String {
+        case rememberMePressed
+        case rememberedUser
+    }
+}
+
+enum KeychainConstants: String {
+    case keychainName
+    
+    enum Keys: String {
+        case rememberMePressed
+        case rememberedUser
+    }
 }

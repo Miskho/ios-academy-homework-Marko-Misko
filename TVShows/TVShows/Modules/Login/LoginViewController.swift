@@ -35,13 +35,9 @@ final class LoginViewController : UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.rememberMePressed.rawValue) {
-            guard
-                let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.rememberedUser.rawValue),
-                let rememberedUser = try? PropertyListDecoder().decode(RememberedUser.self, from: data)
-                else {
-                    return
-            }
+        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.rememberMePressed.rawValue),
+            let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.rememberedUser.rawValue),
+            let rememberedUser = try? PropertyListDecoder().decode(RememberedUser.self, from: data) {
             _logInUserWith(email: rememberedUser.email, password: rememberedUser.password)
         }
     }
@@ -140,9 +136,10 @@ final class LoginViewController : UIViewController {
     }
     
     private func _rememberUserToUserDefaults(_ user: RememberedUser) {
-        if rememberMeButton.isSelected {
-            UserDefaults.standard.set(true, forKey: UserDefaultsKeys.rememberMePressed.rawValue)
-            UserDefaults.standard.set(try? PropertyListEncoder().encode(user), forKey: UserDefaultsKeys.rememberedUser.rawValue)
+        if rememberMeButton.isSelected,
+            let encoded = try? PropertyListEncoder().encode(user) {
+                UserDefaults.standard.set(true, forKey: UserDefaultsKeys.rememberMePressed.rawValue)
+                UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.rememberedUser.rawValue)
         }
     }
     

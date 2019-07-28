@@ -16,6 +16,7 @@
 		4252FBCB22EDBF2600132190 /* EpisodeDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4252FBCA22EDBF2600132190 /* EpisodeDetails.storyboard */; };
 		4252FBCD22EDBFE300132190 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4252FBCC22EDBFE300132190 /* CommentsViewController.swift */; };
 		4252FBCF22EDBFFA00132190 /* EpisodeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4252FBCE22EDBFFA00132190 /* EpisodeDetailsViewController.swift */; };
+		4252FBD222EE0C1900132190 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4252FBD122EE0C1900132190 /* CommentTableViewCell.swift */; };
 		426B35B222E4D2C20066003A /* TVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426B35B122E4D2C20066003A /* TVShow.swift */; };
 		426B35B522E510C20066003A /* TVShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426B35B422E510C20066003A /* TVShowTableViewCell.swift */; };
 		426B35B822E7140F0066003A /* ShowDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426B35B722E7140F0066003A /* ShowDetailsViewController.swift */; };
@@ -47,6 +48,7 @@
 		4252FBCA22EDBF2600132190 /* EpisodeDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EpisodeDetails.storyboard; sourceTree = "<group>"; };
 		4252FBCC22EDBFE300132190 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		4252FBCE22EDBFFA00132190 /* EpisodeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailsViewController.swift; sourceTree = "<group>"; };
+		4252FBD122EE0C1900132190 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		426B35B122E4D2C20066003A /* TVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShow.swift; sourceTree = "<group>"; };
 		426B35B422E510C20066003A /* TVShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTableViewCell.swift; sourceTree = "<group>"; };
 		426B35B722E7140F0066003A /* ShowDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailsViewController.swift; sourceTree = "<group>"; };
@@ -131,10 +133,19 @@
 		4252FBC622EDBEFA00132190 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
+				4252FBD022EE07BA00132190 /* Cell */,
 				4252FBC722EDBF0E00132190 /* Comments.storyboard */,
 				4252FBCC22EDBFE300132190 /* CommentsViewController.swift */,
 			);
 			path = Comments;
+			sourceTree = "<group>";
+		};
+		4252FBD022EE07BA00132190 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4252FBD122EE0C1900132190 /* CommentTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		426B35B322E510630066003A /* Cell */ = {
@@ -401,6 +412,7 @@
 				426B35B222E4D2C20066003A /* TVShow.swift in Sources */,
 				4204616622CE53DD00740601 /* AppDelegate.swift in Sources */,
 				42850F8C22E751FE0052F05F /* EpisodeTableViewCell.swift in Sources */,
+				4252FBD222EE0C1900132190 /* CommentTableViewCell.swift in Sources */,
 				4252FBCD22EDBFE300132190 /* CommentsViewController.swift in Sources */,
 				42F163E522ECCFC900E345C9 /* Constants.swift in Sources */,
 				42D4DA9022E0BAF80061591A /* Alamofire+PromiseKit.swift in Sources */,

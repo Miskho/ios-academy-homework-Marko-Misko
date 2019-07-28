@@ -25,6 +25,15 @@ class EpisodeTableViewCell: UITableViewCell {
         seasonAndEpisodeLabel.text = nil
     }
     
+    // MARK: - IB Actions
+    @IBAction func episodeDetailsPressed(_ sender: Any) {
+        _navigateToEpisodeDetails()
+    }
+    
+    private func _navigateToEpisodeDetails() {
+        
+    }
+    
 }
 
 // MARK: - Configure

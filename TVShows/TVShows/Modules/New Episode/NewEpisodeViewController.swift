@@ -81,7 +81,8 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
         _navigateToShowDetailsViewController()
     }
     
-    private func _navigateToShowDetailsViewController() {        navigationController?.setNavigationBarHidden(true, animated: true)
+    private func _navigateToShowDetailsViewController() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
         navigationController?.dismiss(animated: true, completion: nil)
     }
     

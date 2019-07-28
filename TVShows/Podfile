@@ -17,4 +17,6 @@ target 'TVShows' do
   pod 'PromiseKit/Alamofire'
   
   pod 'Kingfisher', '~> 5.0'
+  
+  pod 'KeychainAccess'
 end

@@ -32,7 +32,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="M8C-6T-l5H">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="592"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OfficeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="bWI-ZX-w3o">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OfficeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="bWI-ZX-w3o">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="347"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQK-Ci-aDX">
@@ -143,7 +143,7 @@
                                                                     </constraints>
                                                                     <state key="normal" title="Button" image="ic-navigation-chevron-right-medium"/>
                                                                     <connections>
-                                                                        <action selector="episodeDetailsPressed:" destination="fI1-kC-Pz4" eventType="touchUpInside" id="bjM-MH-uWt"/>
+                                                                        <action selector="episodeDetailsButtonTapped:" destination="fI1-kC-Pz4" eventType="touchUpInside" id="SE7-Qm-76b"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -166,6 +166,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="episodeDetailsButton" destination="GNk-Q1-Ye9" id="0l7-Cz-XdI"/>
                                             <outlet property="episodeTitleLabel" destination="ZHn-pq-ZpK" id="KoZ-ZI-2yG"/>
                                             <outlet property="seasonAndEpisodeLabel" destination="zHC-zx-cCq" id="xXh-9B-mdh"/>
                                         </connections>

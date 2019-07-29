@@ -13,10 +13,22 @@ class EpisodeTableViewCell: UITableViewCell {
     // MARK: - Outlets
     @IBOutlet private weak var seasonAndEpisodeLabel: UILabel!
     @IBOutlet private weak var episodeTitleLabel: UILabel!
+    @IBOutlet private weak var episodeDetailsButton: UIButton!
+    
+    var episodeDetailsButtonAction : (() -> ())?
     
     // MARK: - UITableViewCell methods
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        // Add action to perform when the button is tapped
+        self.episodeDetailsButton.addTarget(self, action: #selector(episodeDetailsButtonTapped(_:)), for: .touchUpInside)
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
     }
     
     override func prepareForReuse() {
@@ -25,13 +37,11 @@ class EpisodeTableViewCell: UITableViewCell {
         seasonAndEpisodeLabel.text = nil
     }
     
-    // MARK: - IB Actions
-    @IBAction func episodeDetailsPressed(_ sender: Any) {
-        _navigateToEpisodeDetails()
-    }
-    
-    private func _navigateToEpisodeDetails() {
-        
+    // MARK: - IBActions
+    @IBAction func episodeDetailsButtonTapped(_ sender: UIButton){
+        // if the closure is defined (not nil)
+        // then execute the code inside the subscribeButtonAction closure
+        episodeDetailsButtonAction?()
     }
     
 }

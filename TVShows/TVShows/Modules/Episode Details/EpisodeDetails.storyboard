@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="C2K-62-2AO">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,43 +10,43 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Episode Details View Controller-->
         <scene sceneID="nqX-9T-pyI">
             <objects>
-                <viewController id="Vhf-8X-Q3b" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EpisodeDetailsViewController" id="Vhf-8X-Q3b" customClass="EpisodeDetailsViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gQ8-5A-G4p">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vS-iO-lzz">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xbF-iz-xcj">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="435.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="xbF-iz-xcj">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="504"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-Xs-PHv">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SiliconValleyEndCreditsMain" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-Xs-PHv">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="350" id="LRG-gS-bqn"/>
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b9V-m4-T7d">
-                                                <rect key="frame" x="0.0" y="350" width="414" height="61.5"/>
+                                                <rect key="frame" x="0.0" y="376" width="414" height="78"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94s-To-Sbo">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94s-To-Sbo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="37"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yuZ-DX-IwL">
-                                                        <rect key="frame" x="0.0" y="20.5" width="414" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="37" width="414" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blO-2M-Ejr">
-                                                        <rect key="frame" x="0.0" y="41" width="414" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="57.5" width="414" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -54,7 +54,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QW-JQ-yjO">
-                                                <rect key="frame" x="0.0" y="411.5" width="414" height="24"/>
+                                                <rect key="frame" x="0.0" y="480" width="414" height="24"/>
                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-1" maxY="0.0"/>
                                                 <state key="normal" title="Comments" image="ic-message-circle"/>
                                             </button>
@@ -75,7 +75,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1MR-CA-iiE">
-                                <rect key="frame" x="16" y="60" width="32" height="32"/>
+                                <rect key="frame" x="16" y="104" width="32" height="32"/>
                                 <state key="normal" image="ic-navigate-back"/>
                             </button>
                         </subviews>
@@ -90,12 +90,39 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tDa-aW-0Wx"/>
                     </view>
+                    <navigationItem key="navigationItem" id="cJu-KJ-6gy"/>
+                    <connections>
+                        <outlet property="episodeAndSeasonNumberLabel" destination="yuZ-DX-IwL" id="ofr-8k-U3y"/>
+                        <outlet property="episodeDescriptionLabel" destination="blO-2M-Ejr" id="HpO-gq-574"/>
+                        <outlet property="episodeImage" destination="LVS-Xs-PHv" id="3Zz-ep-Eb6"/>
+                        <outlet property="episodeNameLabel" destination="94s-To-Sbo" id="mac-Sr-SwM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IcV-OC-duf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="973.91304347826099" y="47.544642857142854"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="L0v-gu-yKO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="C2K-62-2AO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="53q-V9-bsU">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Vhf-8X-Q3b" kind="relationship" relationship="rootViewController" id="5P4-rj-Kv9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="99j-eB-w4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-62" y="48"/>
         </scene>
     </scenes>
     <resources>
+        <image name="SiliconValleyEndCreditsMain" width="633" height="356"/>
         <image name="ic-message-circle" width="24" height="24"/>
         <image name="ic-navigate-back" width="32" height="32"/>
     </resources>

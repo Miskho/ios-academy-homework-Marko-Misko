@@ -102,6 +102,7 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
                 return
         }
         
+        
         Alamofire
             .request(
                 "https://api.infinum.academy/api/episodes",

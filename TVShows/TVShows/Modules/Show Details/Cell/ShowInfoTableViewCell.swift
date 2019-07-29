@@ -17,7 +17,7 @@ class ShowInfoTableViewCell: UITableViewCell {
     @IBOutlet private weak var episodeCountLabel: UILabel!
     
     // MARK: - Properties
-    private var gradient: CAGradientLayer!
+    private let gradient = CAGradientLayer()
     
     // MARK: - UITableViewCell
     override func layoutSubviews() {
@@ -28,7 +28,6 @@ class ShowInfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        gradient = CAGradientLayer()
         gradient.frame = showImage.bounds
         gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
         gradient.locations = [0.1, 0.9, 1]

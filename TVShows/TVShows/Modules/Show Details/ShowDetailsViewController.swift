@@ -31,11 +31,11 @@ class ShowDetailsViewController: UIViewController {
     }
     
     // MARK: - Outlet actions
-    @IBAction func backToHomeButtonPressed(_ sender: Any) {
+    @IBAction private func backToHomeButtonPressed(_ sender: Any) {
         _navigateToHomeViewController()
     }
     
-    @IBAction func newEpisodeButtonPressed(_ sender: Any) {
+    @IBAction private func newEpisodeButtonPressed(_ sender: Any) {
         _navigateToNewEpisodeViewController()
     }
     
@@ -118,6 +118,16 @@ class ShowDetailsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    private func _navigateToEpisodeDetailsViewController(with episode: Episode) {
+        let episodeDetailsStoryboard = UIStoryboard(name: "EpisodeDetails", bundle: nil)
+        let episodeDetailsViewController = episodeDetailsStoryboard.instantiateViewController(withIdentifier: "EpisodeDetailsViewController") as! EpisodeDetailsViewController
+        episodeDetailsViewController.configureBeforeNavigating(with: episode, credentials: loginCredentials!)
+        
+        let navigationController = UINavigationController(rootViewController:
+            episodeDetailsViewController)
+        present(navigationController, animated: true)
+    }
+    
 }
 
 
@@ -153,6 +163,12 @@ extension ShowDetailsViewController: UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EpisodeTableViewCell.self), for: indexPath) as! EpisodeTableViewCell
             cell.configure(with: episodes[indexPath.row - 1])
+            
+            cell.episodeDetailsButtonAction = { [unowned self] in
+                let selectedEpisode = self.episodes[indexPath.row]
+                self._navigateToEpisodeDetailsViewController(with: selectedEpisode)
+            }
+            
             return cell
         }
     }

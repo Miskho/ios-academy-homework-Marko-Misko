@@ -56,7 +56,12 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QW-JQ-yjO">
                                                 <rect key="frame" x="0.0" y="480" width="414" height="24"/>
                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-1" maxY="0.0"/>
-                                                <state key="normal" title="Comments" image="ic-message-circle"/>
+                                                <state key="normal" title="Comments" image="ic-message-circle">
+                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="commentsButtonPressed:" destination="Vhf-8X-Q3b" eventType="touchUpInside" id="Tsd-hX-z4p"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -76,7 +81,11 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1MR-CA-iiE">
                                 <rect key="frame" x="16" y="104" width="32" height="32"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="ic-navigate-back"/>
+                                <connections>
+                                    <action selector="backToShowDetailsButtonPressed:" destination="Vhf-8X-Q3b" eventType="touchDragInside" id="iST-dQ-seX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

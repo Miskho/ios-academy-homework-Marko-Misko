@@ -13,13 +13,13 @@ import PromiseKit
 import SVProgressHUD
 
 class EpisodeDetailsViewController: UIViewController {
-
+    
     // MARK: - Outlets
     @IBOutlet private weak var episodeNameLabel: UILabel!
     @IBOutlet private weak var episodeImage: UIImageView!
     @IBOutlet private weak var episodeAndSeasonNumberLabel: UILabel!
     @IBOutlet private weak var episodeDescriptionLabel: UILabel!
-
+    
     // MARK: - Properties
     private var loginCredentials: LoginData?
     private var episode: Episode?
@@ -30,7 +30,7 @@ class EpisodeDetailsViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
         _setupEpisodeDetailsViewController()
-
+        
         gradient.frame = episodeImage.bounds
         gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
         gradient.locations = [0.1, 0.9, 1]
@@ -57,7 +57,7 @@ class EpisodeDetailsViewController: UIViewController {
         loginCredentials = credentials
         self.episode = episode
     }
-
+    
     private func _setupEpisodeDetailsViewController() {
         SVProgressHUD.show()
         
@@ -92,11 +92,16 @@ class EpisodeDetailsViewController: UIViewController {
     }
     
     private func _navigateToShowDetailsViewController() {
-        
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
     private func _navigateToCommentsViewController() {
+        let commentsStoryboard = UIStoryboard(name: "Comments", bundle: nil)
+        let commentsViewController = commentsStoryboard.instantiateViewController(withIdentifier: "CommentsViewController") as! CommentsViewController
+        commentsViewController.configureBeforeNavigating(with: episode!, credentials: loginCredentials!)
         
+        let navigationController = UINavigationController(rootViewController: commentsViewController)
+        present(navigationController, animated: true)
     }
     
 }

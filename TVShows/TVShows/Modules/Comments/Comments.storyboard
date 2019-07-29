@@ -53,6 +53,11 @@
                                                 </stackView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="commentContentLabel" destination="BI7-g0-15F" id="f6d-EX-jlo"/>
+                                            <outlet property="userImage" destination="cXp-EL-PCv" id="3FN-x2-ijk"/>
+                                            <outlet property="usernameLabel" destination="kSh-rS-hmO" id="8kW-FL-Eyi"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -73,6 +78,9 @@
                                         <state key="normal" title="Post">
                                             <color key="titleColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="postCommentButtonTapped:" destination="HcK-Mb-tb8" eventType="touchUpInside" id="P3W-zd-FWe"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -90,6 +98,11 @@
                         <viewLayoutGuide key="safeArea" id="zbG-ba-rbk"/>
                     </view>
                     <navigationItem key="navigationItem" title="Comments" id="zko-l7-Loj"/>
+                    <connections>
+                        <outlet property="commentsTableView" destination="Ndo-4F-T5n" id="zUi-sw-Bbh"/>
+                        <outlet property="newCommentTextField" destination="O83-nh-aYw" id="GjJ-GE-HRT"/>
+                        <outlet property="postButton" destination="6ei-Og-BGG" id="byg-dL-4yK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bIZ-kd-ecN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

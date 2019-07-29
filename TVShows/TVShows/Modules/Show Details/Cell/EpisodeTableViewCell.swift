@@ -21,14 +21,11 @@ class EpisodeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        // Add action to perform when the button is tapped
         self.episodeDetailsButton.addTarget(self, action: #selector(episodeDetailsButtonTapped(_:)), for: .touchUpInside)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     override func prepareForReuse() {
@@ -39,8 +36,6 @@ class EpisodeTableViewCell: UITableViewCell {
     
     // MARK: - IBActions
     @IBAction func episodeDetailsButtonTapped(_ sender: UIButton){
-        // if the closure is defined (not nil)
-        // then execute the code inside the subscribeButtonAction closure
         episodeDetailsButtonAction?()
     }
     
@@ -48,9 +43,11 @@ class EpisodeTableViewCell: UITableViewCell {
 
 // MARK: - Configure
 extension EpisodeTableViewCell {
+    
     func configure(with episode: Episode) {
         seasonAndEpisodeLabel.text = "S" + episode.season + " Ep" + episode.episodeNumber
         episodeTitleLabel.text = !episode.title.isEmpty ? episode.title : " "
     }
+    
 }
 

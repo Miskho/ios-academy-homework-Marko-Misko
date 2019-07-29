@@ -182,7 +182,18 @@ extension ShowDetailsViewController: UITableViewDataSource {
 extension ShowDetailsViewController: NewEpisodeReloadTableViewDelegate {
     
     func newEpisodeAdded() {
-        episodesTableView.reloadData()
+        SVProgressHUD.show()
+        
+        firstly {
+            return _fetchEpisodes()
+            }.done { [weak self] in
+                self?.episodes = $0
+                self?.episodesTableView.reloadData()
+            }.ensure {
+                SVProgressHUD.dismiss()
+            }.catch {
+                print("API failure: \($0)")
+        }
     }
     
 }

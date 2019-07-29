@@ -12,15 +12,14 @@ enum UserDefaultsConstants {
     
     enum Keys: String {
         case rememberMePressed
-        case rememberedUser
     }
 }
 
 enum KeychainConstants: String {
-    case keychainName
+    case loginKeychain
     
     enum Keys: String {
-        case rememberMePressed
-        case rememberedUser
+        case rememberedEmail
+        case rememberedPassword
     }
 }

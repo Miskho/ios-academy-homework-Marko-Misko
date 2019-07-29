@@ -40,9 +40,9 @@ final class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItem = logoutItem
         
         let changeLayoutItem = UIBarButtonItem.init(image: UIImage(named: "ic-gridview"),
-                                              style: .plain,
-                                              target: self,
-                                              action: #selector(changeLayoutActionHandler))
+            style: .plain,
+            target: self,
+            action: #selector(changeLayoutActionHandler))
         navigationItem.rightBarButtonItem = changeLayoutItem
     }
     
@@ -54,10 +54,7 @@ final class HomeViewController: UIViewController {
     // MARK: - Private methods
     @objc private func logoutActionHandler() {
         _deleteUserFromPersistance()
-        
-        let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
-        let loginViewController = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        navigationController?.setViewControllers([loginViewController], animated: true)
+        _navigateToLoginViewController()
     }
     
     @objc private func changeLayoutActionHandler() {
@@ -67,14 +64,12 @@ final class HomeViewController: UIViewController {
         collectionView.isHidden = listLayout
     }
 
-    
     private func _deleteUserFromPersistance() {
         UserDefaults.standard.removeObject(forKey: UserDefaultsConstants.Keys.rememberMePressed.rawValue)
-        UserDefaults.standard.removeObject(forKey: UserDefaultsConstants.Keys.rememberedUser.rawValue)
 
-//        let keychain = Keychain(service: KeychainConstants.keychainName.rawValue)
-//        keychain[KeychainConstants.Keys.rememberMePressed.rawValue] = nil
-//        keychain[KeychainConstants.Keys.rememberedUser.rawValue] = nil
+        let keychain = Keychain(service: KeychainConstants.loginKeychain.rawValue)
+        keychain[KeychainConstants.Keys.rememberedEmail.rawValue] = nil
+        keychain[KeychainConstants.Keys.rememberedPassword.rawValue] = nil
     }
     
     private func _setupTableView() {
@@ -116,6 +111,21 @@ final class HomeViewController: UIViewController {
                 print("API failure: \($0)")
         }
     }
+    
+    private func _navigateToLoginViewController() {
+        let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        let loginViewController = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        navigationController?.setViewControllers([loginViewController], animated: true)
+    }
+    
+    private func _navigateToShowDetailsViewController(showing show: TVShow) {
+        let showDetailsStoryboard = UIStoryboard(name: "ShowDetails", bundle: nil)
+        let showDetailsViewController = showDetailsStoryboard.instantiateViewController(withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
+        showDetailsViewController.configureBeforeNavigating(with: show, credentials: loginCredentials!)
+        
+        navigationController?.pushViewController(showDetailsViewController, animated: true)
+    }
+    
 }
 
 // MARK: - UITableView
@@ -123,12 +133,7 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let showDetailsStoryboard = UIStoryboard(name: "ShowDetails", bundle: nil)
-        let showDetailsViewController = showDetailsStoryboard.instantiateViewController(withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
-        showDetailsViewController.configureBeforeNavigating(with: tvShows[indexPath.row], credentials: loginCredentials!)
-        
-        navigationController?.pushViewController(showDetailsViewController, animated: true)
+        _navigateToShowDetailsViewController(showing: tvShows[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -165,12 +170,7 @@ extension HomeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        
-        let showDetailsStoryboard = UIStoryboard(name: "ShowDetails", bundle: nil)
-        let showDetailsViewController = showDetailsStoryboard.instantiateViewController(withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
-        showDetailsViewController.configureBeforeNavigating(with: tvShows[indexPath.row], credentials: loginCredentials!)
-        
-        navigationController?.pushViewController(showDetailsViewController, animated: true)
+        _navigateToShowDetailsViewController(showing: tvShows[indexPath.row])
     }
     
 }

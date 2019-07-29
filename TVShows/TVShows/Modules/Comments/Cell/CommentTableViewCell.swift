@@ -10,6 +10,11 @@ import UIKit
 
 class CommentTableViewCell: UITableViewCell {
 
+    // MARK: - Outlets
+    @IBOutlet private weak var userImage: UIImageView!
+    @IBOutlet private weak var usernameLabel: UILabel!
+    @IBOutlet private weak var commentContentLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +26,13 @@ class CommentTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+// MARK: - Configure
+extension CommentTableViewCell {
+    
+    func configure(with comment: Comment) {
+       
+    }
+    
 }

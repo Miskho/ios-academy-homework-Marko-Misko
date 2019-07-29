@@ -36,15 +36,12 @@ final class LoginViewController : UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //        let keychain = Keychain(service: KeychainConstants.keychainName.rawValue)
-        //        if let token = try? keychain.get(KeychainConstants.Keys.rememberMePressed.rawValue) {
-        //            _logInUserWith(email: rememberedUser.email, password: rememberedUser.password)
-        //        }
-        
-        if UserDefaults.standard.bool(forKey: UserDefaultsConstants.Keys.rememberMePressed.rawValue),
-            let data = UserDefaults.standard.data(forKey: UserDefaultsConstants.Keys.rememberedUser.rawValue),
-            let rememberedUser = try? PropertyListDecoder().decode(RememberedUser.self, from: data) {
-            _logInUserWith(email: rememberedUser.email, password: rememberedUser.password)
+        if UserDefaults.standard.bool(forKey: UserDefaultsConstants.Keys.rememberMePressed.rawValue) {
+            let keychain = Keychain(service: KeychainConstants.loginKeychain.rawValue)
+            if let rememberedEmail = keychain[KeychainConstants.Keys.rememberedEmail.rawValue],
+                let rememberedPassword = keychain[KeychainConstants.Keys.rememberedPassword.rawValue] {
+                _logInUserWith(email: rememberedEmail, password: rememberedPassword)
+            }
         }
     }
     
@@ -141,18 +138,14 @@ final class LoginViewController : UIViewController {
         logoImage.layer.add(pulseAnimation, forKey: "scale")
     }
     
-    private func _rememberUserToPersistance(_ user: RememberedUser) {
-        if rememberMeButton.isSelected,
-            let encoded = try? PropertyListEncoder().encode(user) {
+    private func _persistRemeberedUser(_ user: RememberedUser) {
+        if rememberMeButton.isSelected {
             UserDefaults.standard.set(true, forKey: UserDefaultsConstants.Keys.rememberMePressed.rawValue)
-            UserDefaults.standard.set(encoded, forKey: UserDefaultsConstants.Keys.rememberedUser.rawValue)
+            
+            let keychain = Keychain(service: KeychainConstants.loginKeychain.rawValue)
+            keychain[KeychainConstants.Keys.rememberedEmail.rawValue] = user.email
+            keychain[KeychainConstants.Keys.rememberedPassword.rawValue] = user.password
         }
-        //        let keychain = Keychain(service: KeychainConstants.keychainName.rawValue)
-        //        if rememberMeButton.isSelected,
-        //            let encoded = try? PropertyListEncoder().encode(user) {
-        //            keychain[KeychainConstants.Keys.rememberMePressed.rawValue] = String(true)
-        //            keychain[data: KeychainConstants.Keys.rememberedUser.rawValue] = encoded
-        //        }
     }
     
 }
@@ -203,7 +196,7 @@ extension LoginViewController {
                 guard let self = self else { return }
                 self.loginCredentials = $0
                 print("Success: \($0)")
-                self._rememberUserToPersistance(RememberedUser(email: email, password: password))
+                self._persistRemeberedUser(RememberedUser(email: email, password: password))
                 self._navigateToHomeView()
             }
             .ensure {

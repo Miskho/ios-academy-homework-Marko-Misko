@@ -30,7 +30,7 @@
 		4280CC8F22DDC58C00D621D3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4280CC8E22DDC58C00D621D3 /* User.swift */; };
 		428112F122E75C2F008BB945 /* ShowDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 428112F022E75C2F008BB945 /* ShowDetails.storyboard */; };
 		42850F8C22E751FE0052F05F /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42850F8B22E751FE0052F05F /* EpisodeTableViewCell.swift */; };
-		42B16B8922EE949A00E53744 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B16B8822EE949A00E53744 /* Comment.swift */; };
+		42B16B8B22F0666A00E53744 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B16B8A22F0666A00E53744 /* UIColor.swift */; };
 		42D4DA8E22E0983A0061591A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D4DA8D22E0983A0061591A /* Login.storyboard */; };
 		42D4DA9022E0BAF80061591A /* Alamofire+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D4DA8F22E0BAF80061591A /* Alamofire+PromiseKit.swift */; };
 		42EFEC8122E9DE6E004618B4 /* ShowInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFEC8022E9DE6E004618B4 /* ShowInfoTableViewCell.swift */; };
@@ -63,7 +63,7 @@
 		4280CC8E22DDC58C00D621D3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		428112F022E75C2F008BB945 /* ShowDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowDetails.storyboard; sourceTree = "<group>"; };
 		42850F8B22E751FE0052F05F /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
-		42B16B8822EE949A00E53744 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		42B16B8A22F0666A00E53744 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		42D4DA8D22E0983A0061591A /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		42D4DA8F22E0BAF80061591A /* Alamofire+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+PromiseKit.swift"; sourceTree = "<group>"; };
 		42EFEC8022E9DE6E004618B4 /* ShowInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -204,7 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				42D4DA8F22E0BAF80061591A /* Alamofire+PromiseKit.swift */,
-				42F163E422ECCFC900E345C9 /* Constants.swift */,
+				42B16B8A22F0666A00E53744 /* UIColor.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -403,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				426B35B822E7140F0066003A /* ShowDetailsViewController.swift in Sources */,
+				42B16B8B22F0666A00E53744 /* UIColor.swift in Sources */,
 				42EFEC8122E9DE6E004618B4 /* ShowInfoTableViewCell.swift in Sources */,
 				426B35C122E7397E0066003A /* NewEpisodeViewController.swift in Sources */,
 				426B35BE22E7389E0066003A /* ShowDetails.swift in Sources */,

@@ -35,26 +35,7 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.title = "Add episode"
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "Cancel",
-            style: .plain,
-            target: self,
-            action: #selector(didSelectCancel)
-        )
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "Add",
-            style: .plain,
-            target: self,
-            action: #selector(didSelectAddShow)
-        )
-        
-        let pink = UIColor(rgb: 0xFF758C)
-        navigationItem.leftBarButtonItem?.tintColor = pink
-        navigationItem.rightBarButtonItem?.tintColor = pink
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        imagePicker.delegate = self
+        _configureNavigationBarAndItems()
     }
     
     // MARK: - IB Actions
@@ -74,7 +55,7 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
     
     // MARK: - Private methods
     @objc private func didSelectAddShow() {
-        _registerNewEpisode()
+        _addNewEpisode()
     }
     
     @objc private func didSelectCancel() {
@@ -86,9 +67,26 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    private func _registerNewEpisode() {
-        let headers = ["Authorization": loginCredentials!.token]
+    private func _configureNavigationBarAndItems() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Cancel",
+            style: .plain,
+            target: self,
+            action: #selector(didSelectCancel)
+        )
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Add",
+            style: .plain,
+            target: self,
+            action: #selector(didSelectAddShow)
+        )
         
+        let pink = UIColor(rgb: 0xFF758C)
+        navigationItem.leftBarButtonItem?.tintColor = pink
+        navigationItem.rightBarButtonItem?.tintColor = pink
+    }
+    
+    private func _addNewEpisode() {
         guard let episodeTitle = episodeTitleTextField.text,
             let seasonNumber = seasonNumberTextField.text,
             let episodeNumber = episodeNumberTextField.text,
@@ -101,9 +99,26 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
                 _displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please provide all fields below for registering new episode.", preferredStyle: .alert))
                 return
         }
-        
-        
-        Alamofire
+        _sendRequestForRegisteringNewEpisode(named: episodeTitle,
+                description: episodeDescription,
+                number: episodeNumber,
+                season: seasonNumber)
+            .done { [weak self] _ in
+                guard let self = self else { return }
+                self.newEpisodeDelegate?.newEpisodeAdded()
+                self._navigateToShowDetailsViewController()
+            }.catch { [weak self] _ in
+                self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please check the validity of provided data for registering new episode.", preferredStyle: .alert))
+        }
+    }
+    
+    private func _sendRequestForRegisteringNewEpisode(
+                        named episodeTitle: String,
+                        description episodeDescription: String,
+                        number episodeNumber: String,
+                        season seasonNumber: String) -> Promise<Episode> {
+        let headers = ["Authorization": loginCredentials!.token]
+        return Alamofire
             .request(
                 "https://api.infinum.academy/api/episodes",
                 method: .post,
@@ -116,16 +131,9 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
                     "season": seasonNumber
                 ],
                 encoding: JSONEncoding.default,
-                headers: headers
-            ).validate()
+                headers: headers)
+            .validate()
             .responseDecodable(Episode.self, keyPath: "data")
-            .done { [weak self] _ in
-                self?.newEpisodeDelegate?.newEpisodeAdded()
-                self?._navigateToShowDetailsViewController()
-            }.catch { [weak self] _ in
-                self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please check the validity of provided data for registering new episode.", preferredStyle: .alert))
-        }
-        
     }
     
     private func _displaySimpleDisposableAlertUsing(_ alertController: UIAlertController) {

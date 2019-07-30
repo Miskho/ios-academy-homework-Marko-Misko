@@ -14,11 +14,7 @@ class EpisodeTableViewCell: UITableViewCell {
     @IBOutlet private weak var seasonAndEpisodeLabel: UILabel!
     @IBOutlet private weak var episodeTitleLabel: UILabel!
     
-    // MARK: - UITableViewCell methods
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
+    // MARK: - UITableViewCell methods    
     override func prepareForReuse() {
         super.prepareForReuse()
         episodeTitleLabel.text = nil

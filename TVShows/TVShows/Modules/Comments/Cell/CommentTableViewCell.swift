@@ -25,14 +25,25 @@ class CommentTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        userImage.image = nil
+        usernameLabel.text = nil
+        commentContentLabel.text = nil
+    }
+    
 }
+
 
 // MARK: - Configure
 extension CommentTableViewCell {
     
     func configure(with comment: Comment) {
-       
+        userImage.image = UIImage(named: "img-placehoder-user\(Int.random(in: 1 ... 3))")
+        usernameLabel.text = comment.userEmail
+        commentContentLabel.text = comment.text
     }
     
 }

@@ -169,6 +169,8 @@ extension CommentsViewController: UITableViewDelegate {
 extension CommentsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        
         return comments.count
     }
     

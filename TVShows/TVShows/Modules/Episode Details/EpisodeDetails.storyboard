@@ -84,7 +84,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="ic-navigate-back"/>
                                 <connections>
-                                    <action selector="backToShowDetailsButtonPressed:" destination="Vhf-8X-Q3b" eventType="touchDragInside" id="iST-dQ-seX"/>
+                                    <action selector="backToShowDetailsButtonPressed:" destination="Vhf-8X-Q3b" eventType="touchUpInside" id="dxt-u2-O7W"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -165,7 +165,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
             cell.configure(with: episodes[indexPath.row - 1])
             
             cell.episodeDetailsButtonAction = { [unowned self] in
-                let selectedEpisode = self.episodes[indexPath.row]
+                let selectedEpisode = self.episodes[indexPath.row - 1]
                 self._navigateToEpisodeDetailsViewController(with: selectedEpisode)
             }
             

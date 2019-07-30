@@ -25,12 +25,18 @@ final class HomeViewController: UIViewController {
     private let gridIcon = UIImage(named: "ic-gridview")
     private var tvShows = [TVShow]()
     private var loginCredentials: LoginData?
-    private var listLayout = true
+    private var listLayoutFlag = true
+    private let itemsPerRow: CGFloat = 2
+    private let sectionInsets = UIEdgeInsets(top: 50.0,
+                                             left: 20.0,
+                                             bottom: 50.0,
+                                             right: 20.0)
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         _setupTableView()
+        _setupCollectionView()
         _displayTVShows()
     }
     
@@ -50,10 +56,10 @@ final class HomeViewController: UIViewController {
     }
     
     @objc private func changeLayoutActionHandler() {
-        listLayout.toggle()
-        navigationItem.rightBarButtonItem?.image = listLayout ? gridIcon : listIcon
-        tableView.isHidden = !listLayout
-        collectionView.isHidden = listLayout
+        listLayoutFlag.toggle()
+        navigationItem.rightBarButtonItem?.image = listLayoutFlag ? gridIcon : listIcon
+        tableView.isHidden = !listLayoutFlag
+        collectionView.isHidden = listLayoutFlag
     }
 
     private func _setupNavigationBarAndItems() {
@@ -79,7 +85,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func _setupTableView() {
-        tableView.estimatedRowHeight = 110
+        tableView.estimatedRowHeight = 300
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         
@@ -112,6 +118,7 @@ final class HomeViewController: UIViewController {
                 print("Success: \($0)")
                 self.tvShows = $0
                 self.tableView.reloadData()
+                self.collectionView.reloadData()
             }.ensure {
                 SVProgressHUD.dismiss()
             }.catch {
@@ -195,4 +202,29 @@ extension HomeViewController: UICollectionViewDataSource {
         return cell
     }
 
+}
+
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        
+        return CGSize(width: widthPerItem, height: 1.5 * widthPerItem)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
+    }
 }

@@ -12,9 +12,9 @@ import Alamofire
 struct Comment: Codable {
     let text: String
     let episodeId: String
-    let userId: String
+    let userId: String?
     let userEmail: String
-    let type: String
+    let type: String?
     let id: String
     
     enum CodingKeys: String, CodingKey {

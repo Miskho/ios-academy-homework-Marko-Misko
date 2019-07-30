@@ -26,7 +26,6 @@ class ShowDetailsViewController: UIViewController {
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: true)
         _setupShowDetailsViewController()
     }
     
@@ -165,12 +164,11 @@ extension ShowDetailsViewController: UITableViewDataSource {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ShowInfoTableViewCell.self), for: indexPath) as! ShowInfoTableViewCell
             cell.configure(with: showDetails!, episodesCount: episodes.count)
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EpisodeTableViewCell.self), for: indexPath) as! EpisodeTableViewCell
-            cell.configure(with: episodes[indexPath.row - 1])
-            
-            cell.episodeDetailsButtonAction = { [unowned self] in
+            cell.configure(with: episodes[indexPath.row - 1]) { [unowned self] in
                 let selectedEpisode = self.episodes[indexPath.row - 1]
                 self._navigateToEpisodeDetailsViewController(with: selectedEpisode)
             }

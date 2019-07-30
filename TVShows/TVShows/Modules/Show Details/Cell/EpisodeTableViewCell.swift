@@ -16,7 +16,7 @@ class EpisodeTableViewCell: UITableViewCell {
     @IBOutlet private weak var episodeDetailsButton: UIButton!
     
     // MARK: - Properties
-    var episodeDetailsButtonAction : (() -> ())?
+    private var episodeDetailsButtonAction : (() -> ())?
     
     // MARK: - UITableViewCell methods
     override func awakeFromNib() {
@@ -41,9 +41,10 @@ class EpisodeTableViewCell: UITableViewCell {
 // MARK: - Configure
 extension EpisodeTableViewCell {
     
-    func configure(with episode: Episode) {
+    func configure(with episode: Episode, action: (() -> ())? = nil) {
         seasonAndEpisodeLabel.text = "S" + episode.season + " Ep" + episode.episodeNumber
         episodeTitleLabel.text = !episode.title.isEmpty ? episode.title : " "
+        episodeDetailsButtonAction = action
     }
     
 }

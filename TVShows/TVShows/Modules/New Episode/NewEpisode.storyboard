@@ -178,6 +178,7 @@
                         <outlet property="episodeImage" destination="WX6-qV-Gwy" id="C79-4a-npL"/>
                         <outlet property="episodeNumberTextField" destination="rRE-H3-dvy" id="ehe-uC-E0q"/>
                         <outlet property="episodeTitleTextField" destination="JSn-wa-fom" id="V1M-1R-V6n"/>
+                        <outlet property="loadImageButton" destination="ecn-RX-rap" id="zDr-zk-ebO"/>
                         <outlet property="seasonNumberTextField" destination="DqH-9N-rC0" id="0SS-3P-6N3"/>
                     </connections>
                 </viewController>

@@ -11,7 +11,6 @@ import Kingfisher
 
 class TVShowCollectionViewCell: UICollectionViewCell {
     
-    
     // MARK: - Outlets
     @IBOutlet private weak var showImage: UIImageView!
     

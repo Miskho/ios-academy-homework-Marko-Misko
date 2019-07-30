@@ -65,6 +65,8 @@ class CommentsViewController: UIViewController {
     private func _setupCommentsViewController() {
         SVProgressHUD.show()
         
+        newCommentTextField.layer.cornerRadius = 25.0
+        
         _fetchComments()
             .done { [weak self]  in
                 self?.comments = $0
@@ -93,8 +95,9 @@ class CommentsViewController: UIViewController {
                 }
                 return self._fetchComments()
             }.done { [weak self] in
-                self?.comments = $0
-                self?.commentsTableView.reloadData()
+                guard let self = self else { return }
+                self.comments = $0
+                self.commentsTableView.reloadData()
             }.catch {
                 print("API error: \($0)")
         }
@@ -135,7 +138,7 @@ class CommentsViewController: UIViewController {
         let headers = ["Authorization": loginCredentials!.token]
         return Alamofire
             .request(
-                "https://api.infinum.academy/api/\(episode!.id)/comments",
+                "https://api.infinum.academy/api/episodes/\(episode!.id)/comments",
                 method: .get,
                 encoding: JSONEncoding.default,
                 headers: headers
@@ -174,8 +177,6 @@ extension CommentsViewController: UITableViewDelegate {
 extension CommentsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
         return comments.count
     }
     

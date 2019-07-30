@@ -59,9 +59,10 @@ final class HomeViewController: UIViewController {
                 ).validate()
                 .responseDecodable([TVShow].self, keyPath: "data")
             }.done() { [weak self]  in
+                guard let self = self else { return }
                 print("Success: \($0)")
-                self?.tvShows = $0
-                self?.tableView.reloadData()
+                self.tvShows = $0
+                self.tableView.reloadData()
             }.ensure {
                 SVProgressHUD.dismiss()
             }.catch {

@@ -55,8 +55,9 @@ class ShowDetailsViewController: UIViewController {
                 self?.showDetails = showDetails
                 return self!._fetchEpisodes()
             }.done { [weak self]  in
-                self?.episodes = $0
-                self?._displayShowDetails()
+                guard let self = self else { return }
+                self.episodes = $0
+                self._displayShowDetails()
             }.ensure {
                 SVProgressHUD.dismiss()
             }.catch {

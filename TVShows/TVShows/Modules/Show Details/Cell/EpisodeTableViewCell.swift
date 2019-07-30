@@ -15,6 +15,7 @@ class EpisodeTableViewCell: UITableViewCell {
     @IBOutlet private weak var episodeTitleLabel: UILabel!
     @IBOutlet private weak var episodeDetailsButton: UIButton!
     
+    // MARK: - Properties
     var episodeDetailsButtonAction : (() -> ())?
     
     // MARK: - UITableViewCell methods
@@ -24,11 +25,7 @@ class EpisodeTableViewCell: UITableViewCell {
         self.episodeDetailsButton.addTarget(self, action: #selector(episodeDetailsButtonTapped(_:)), for: .touchUpInside)
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    override func prepareForReuse() {
+   override func prepareForReuse() {
         super.prepareForReuse()
         episodeTitleLabel.text = nil
         seasonAndEpisodeLabel.text = nil

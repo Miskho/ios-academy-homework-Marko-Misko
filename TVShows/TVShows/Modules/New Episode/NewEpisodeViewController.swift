@@ -34,7 +34,6 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.title = "Add episode"
         _configureNavigationBarAndItems()
     }
     
@@ -42,10 +41,9 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
     @IBAction func loadImageButtonTapped(_ sender: UIButton) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
-        
         present(imagePicker, animated: true, completion: nil)
     }
-
+    
     // MARK: - Public methods
     func configureBeforeNavigating(with show: TVShow, credentials: LoginData, delegate: NewEpisodeReloadTableViewDelegate) {
         loginCredentials = credentials
@@ -68,6 +66,7 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
     }
     
     private func _configureNavigationBarAndItems() {
+        navigationController?.title = "Add episode"
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Cancel",
             style: .plain,
@@ -99,11 +98,13 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
                 _displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please provide all fields below for registering new episode.", preferredStyle: .alert))
                 return
         }
-        _sendRequestForRegisteringNewEpisode(named: episodeTitle,
-                description: episodeDescription,
-                number: episodeNumber,
-                season: seasonNumber)
-            .done { [weak self] _ in
+        
+        firstly {
+            _sendRequestForRegisteringNewEpisode(named: episodeTitle,
+                                                 description: episodeDescription,
+                                                 number: episodeNumber,
+                                                 season: seasonNumber)
+            }.done { [weak self] _ in
                 guard let self = self else { return }
                 self.newEpisodeDelegate?.newEpisodeAdded()
                 self._navigateToShowDetailsViewController()
@@ -113,11 +114,12 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
     }
     
     private func _sendRequestForRegisteringNewEpisode(
-                        named episodeTitle: String,
-                        description episodeDescription: String,
-                        number episodeNumber: String,
-                        season seasonNumber: String) -> Promise<Episode> {
+        named episodeTitle: String,
+        description episodeDescription: String,
+        number episodeNumber: String,
+        season seasonNumber: String) -> Promise<Episode> {
         let headers = ["Authorization": loginCredentials!.token]
+        
         return Alamofire
             .request(
                 "https://api.infinum.academy/api/episodes",
@@ -155,33 +157,11 @@ extension NewEpisodeViewController: UIImagePickerControllerDelegate {
             episodeImage.contentMode = .scaleAspectFit
             episodeImage.image = pickedImage
         }
-        
         dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
-    }
-    
-}
-
-// MARK: - UIColor extension for creating colors using hexadecimal notation
-extension UIColor {
-    
-    convenience init(red: Int, green: Int, blue: Int) {
-        assert(red >= 0 && red <= 255, "Invalid red component")
-        assert(green >= 0 && green <= 255, "Invalid green component")
-        assert(blue >= 0 && blue <= 255, "Invalid blue component")
-        
-        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-    }
-    
-    convenience init(rgb: Int) {
-        self.init(
-            red: (rgb >> 16) & 0xFF,
-            green: (rgb >> 8) & 0xFF,
-            blue: rgb & 0xFF
-        )
     }
     
 }

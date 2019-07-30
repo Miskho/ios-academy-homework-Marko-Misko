@@ -29,7 +29,9 @@ class CommentsViewController: UIViewController {
         super.viewDidLoad()
         
         _setupCommentsViewController()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "ic-navigate-back"),
             style: .plain,
@@ -83,21 +85,8 @@ class CommentsViewController: UIViewController {
                 _displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new comment", message: "Please fill in the comment text field for adding new comment.", preferredStyle: .alert))
                 return
         }
-        
-        let headers = ["Authorization": loginCredentials!.token]
         firstly {
-            Alamofire
-                .request(
-                    "https://api.infinum.academy/api/comments",
-                    method: .post,
-                    parameters: [
-                        "text": comment,
-                        "episodeId": episodeId
-                    ],
-                    encoding: JSONEncoding.default,
-                    headers: headers
-                ).validate()
-                .responseDecodable(Comment.self, keyPath: "data")
+            _sendRequestForPostingComment(comment, episodeId: episodeId)
             }.then { [weak self] _ -> Promise<[Comment]> in
                 guard let self = self else {
                     return Promise(error: NSError())
@@ -124,6 +113,22 @@ class CommentsViewController: UIViewController {
         
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
+    }
+    
+    private func _sendRequestForPostingComment(_ comment: String, episodeId: String) -> Promise<Comment> {
+        let headers = ["Authorization": loginCredentials!.token]
+        return Alamofire
+            .request(
+                "https://api.infinum.academy/api/comments",
+                method: .post,
+                parameters: [
+                    "text": comment,
+                    "episodeId": episodeId
+                ],
+                encoding: JSONEncoding.default,
+                headers: headers
+            ).validate()
+            .responseDecodable(Comment.self, keyPath: "data")
     }
     
     private func _fetchComments() -> Promise<[Comment]> {

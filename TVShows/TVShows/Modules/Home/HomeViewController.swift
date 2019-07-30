@@ -32,18 +32,10 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         _setupTableView()
         _displayTVShows()
-        
-        let logoutItem = UIBarButtonItem.init(image: UIImage(named: "ic-logout"),
-            style: .plain,
-            target: self,
-            action: #selector(logoutActionHandler))
-        navigationItem.leftBarButtonItem = logoutItem
-        
-        let changeLayoutItem = UIBarButtonItem.init(image: UIImage(named: "ic-gridview"),
-            style: .plain,
-            target: self,
-            action: #selector(changeLayoutActionHandler))
-        navigationItem.rightBarButtonItem = changeLayoutItem
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        _setupNavigationBarAndItems()
     }
     
     // MARK: - Public methods
@@ -64,6 +56,20 @@ final class HomeViewController: UIViewController {
         collectionView.isHidden = listLayout
     }
 
+    private func _setupNavigationBarAndItems() {
+        let logoutItem = UIBarButtonItem.init(image: UIImage(named: "ic-logout"),
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(logoutActionHandler))
+        navigationItem.leftBarButtonItem = logoutItem
+        
+        let changeLayoutItem = UIBarButtonItem.init(image: UIImage(named: "ic-gridview"),
+                                                    style: .plain,
+                                                    target: self,
+                                                    action: #selector(changeLayoutActionHandler))
+        navigationItem.rightBarButtonItem = changeLayoutItem
+    }
+    
     private func _deleteUserFromPersistance() {
         UserDefaults.standard.removeObject(forKey: UserDefaultsConstants.Keys.rememberMePressed.rawValue)
 

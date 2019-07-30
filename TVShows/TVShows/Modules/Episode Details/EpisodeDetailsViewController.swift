@@ -28,18 +28,16 @@ class EpisodeDetailsViewController: UIViewController {
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: true)
         _setupEpisodeDetailsViewController()
-        
-        gradient.frame = episodeImage.bounds
-        gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
-        gradient.locations = [0.1, 0.9, 1]
-        episodeImage.layer.mask = gradient
+        _setupGradient()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         gradient.frame = episodeImage.bounds
     }
     
@@ -56,6 +54,14 @@ class EpisodeDetailsViewController: UIViewController {
     func configureBeforeNavigating(with episode: Episode, credentials: LoginData) {
         loginCredentials = credentials
         self.episode = episode
+    }
+    
+    // MARK: - Private methods
+    private func _setupGradient() {
+        gradient.frame = episodeImage.bounds
+        gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
+        gradient.locations = [0.1, 0.9, 1]
+        episodeImage.layer.mask = gradient
     }
     
     private func _setupEpisodeDetailsViewController() {

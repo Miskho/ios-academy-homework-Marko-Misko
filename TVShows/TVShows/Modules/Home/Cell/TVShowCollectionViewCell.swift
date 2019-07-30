@@ -16,11 +16,7 @@ class TVShowCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var showImage: UIImageView!
     
     // MARK: - UITableViewCell methods
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    override func prepareForReuse() {
+   override func prepareForReuse() {
         super.prepareForReuse()
         showImage.image = nil
     }

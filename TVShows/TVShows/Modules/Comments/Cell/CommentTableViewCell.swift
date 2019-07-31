@@ -29,7 +29,9 @@ class CommentTableViewCell: UITableViewCell {
 extension CommentTableViewCell {
     
     func configure(with comment: Comment) {
-        userImage.image = UIImage(named: "img-placehoder-user\(Int.random(in: 1 ... 3))")
+        let imageName = "img-placeholder-user\(Int.random(in: 1 ... 3))"
+        let image = UIImage(named: imageName)
+        userImage.image = image
         usernameLabel.text = comment.userEmail
         commentContentLabel.text = comment.text
     }

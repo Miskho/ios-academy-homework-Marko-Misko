@@ -58,11 +58,11 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TVShowTableViewCell" rowHeight="223" id="B4L-mc-MDP" customClass="TVShowTableViewCell" customModule="TVShows" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="223"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TVShowTableViewCell" rowHeight="240" id="B4L-mc-MDP" customClass="TVShowTableViewCell" customModule="TVShows" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="B4L-mc-MDP" id="pUY-h8-m0C">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="223"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="240"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="LTI-Iq-nda">
@@ -87,6 +87,7 @@
                                             <constraints>
                                                 <constraint firstItem="LTI-Iq-nda" firstAttribute="top" secondItem="pUY-h8-m0C" secondAttribute="top" constant="20" id="4oG-N4-2Dh"/>
                                                 <constraint firstItem="LTI-Iq-nda" firstAttribute="centerX" secondItem="pUY-h8-m0C" secondAttribute="centerX" id="Bhc-Mh-BLu"/>
+                                                <constraint firstAttribute="bottom" secondItem="LTI-Iq-nda" secondAttribute="bottom" constant="20" id="NdC-ro-jrx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -110,11 +111,6 @@
                             <constraint firstItem="usD-PU-lic" firstAttribute="leading" secondItem="G8Y-E7-vKR" secondAttribute="leading" id="uqN-t1-1eX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G8Y-E7-vKR"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="usD-PU-lic"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Shows" id="wjM-ju-KyU"/>
                     <connections>

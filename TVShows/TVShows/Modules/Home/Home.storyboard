@@ -98,6 +98,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="VWK-MO-E5V" firstAttribute="leading" secondItem="G8Y-E7-vKR" secondAttribute="leading" id="7gA-qp-Dwt"/>
                             <constraint firstItem="usD-PU-lic" firstAttribute="top" secondItem="G8Y-E7-vKR" secondAttribute="top" id="Bix-YJ-DDc"/>
@@ -109,6 +110,11 @@
                             <constraint firstItem="usD-PU-lic" firstAttribute="leading" secondItem="G8Y-E7-vKR" secondAttribute="leading" id="uqN-t1-1eX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G8Y-E7-vKR"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="usD-PU-lic"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Shows" id="wjM-ju-KyU"/>
                     <connections>
@@ -128,6 +134,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PkT-O8-aMT">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

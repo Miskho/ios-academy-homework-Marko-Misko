@@ -68,12 +68,15 @@ final class HomeViewController: UIViewController {
                                               target: self,
                                               action: #selector(logoutActionHandler))
         navigationItem.leftBarButtonItem = logoutItem
+        navigationItem.leftBarButtonItem?.tintColor = .darkGray
         
         let changeLayoutItem = UIBarButtonItem.init(image: UIImage(named: "ic-gridview"),
                                                     style: .plain,
                                                     target: self,
                                                     action: #selector(changeLayoutActionHandler))
         navigationItem.rightBarButtonItem = changeLayoutItem
+        navigationItem.rightBarButtonItem?.tintColor = .darkGray
+
     }
     
     private func _deleteUserFromPersistance() {

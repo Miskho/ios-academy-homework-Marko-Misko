@@ -55,6 +55,16 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="kSh-rS-hmO" secondAttribute="trailing" id="BIv-0V-pe5"/>
+                                                                <constraint firstItem="BI7-g0-15F" firstAttribute="leading" secondItem="hWh-fP-Ues" secondAttribute="leading" id="HG3-WE-ia4"/>
+                                                                <constraint firstItem="kSh-rS-hmO" firstAttribute="top" secondItem="hWh-fP-Ues" secondAttribute="top" id="Q8l-St-Xk6"/>
+                                                                <constraint firstItem="BI7-g0-15F" firstAttribute="top" secondItem="kSh-rS-hmO" secondAttribute="bottom" id="aYH-CB-Ver"/>
+                                                                <constraint firstItem="kSh-rS-hmO" firstAttribute="leading" secondItem="hWh-fP-Ues" secondAttribute="leading" id="eOx-bD-zym"/>
+                                                                <constraint firstAttribute="bottom" secondItem="BI7-g0-15F" secondAttribute="bottom" id="fHG-5G-FT3"/>
+                                                                <constraint firstAttribute="trailing" secondItem="BI7-g0-15F" secondAttribute="trailing" id="rwB-ZS-aOO"/>
+                                                                <constraint firstItem="BI7-g0-15F" firstAttribute="top" secondItem="kSh-rS-hmO" secondAttribute="bottom" id="tad-I4-dPI"/>
+                                                            </constraints>
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
@@ -74,10 +84,10 @@
                                 </prototypes>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="kt8-3s-poO">
-                                <rect key="frame" x="20" y="836" width="374" height="40"/>
+                                <rect key="frame" x="24" y="836" width="366" height="40"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O83-nh-aYw">
-                                        <rect key="frame" x="0.0" y="0.0" width="319" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Uji-jL-VO5"/>
                                         </constraints>
@@ -86,7 +96,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ei-Og-BGG">
-                                        <rect key="frame" x="334" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="326" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="e0P-Wl-51A"/>
                                         </constraints>
@@ -107,9 +117,9 @@
                             <constraint firstItem="Ndo-4F-T5n" firstAttribute="top" secondItem="zbG-ba-rbk" secondAttribute="top" id="KEx-4Z-YlU"/>
                             <constraint firstItem="kt8-3s-poO" firstAttribute="centerX" secondItem="IAd-oH-aaT" secondAttribute="centerX" id="R0m-YP-96A"/>
                             <constraint firstItem="Ndo-4F-T5n" firstAttribute="leading" secondItem="zbG-ba-rbk" secondAttribute="leading" id="cbp-cO-x2q"/>
-                            <constraint firstItem="zbG-ba-rbk" firstAttribute="trailing" secondItem="kt8-3s-poO" secondAttribute="trailing" constant="20" id="g9s-OL-wPt"/>
+                            <constraint firstItem="zbG-ba-rbk" firstAttribute="trailing" secondItem="kt8-3s-poO" secondAttribute="trailing" constant="24" id="g9s-OL-wPt"/>
                             <constraint firstItem="kt8-3s-poO" firstAttribute="top" secondItem="Ndo-4F-T5n" secondAttribute="bottom" constant="12" id="gOk-aj-vix"/>
-                            <constraint firstItem="kt8-3s-poO" firstAttribute="leading" secondItem="zbG-ba-rbk" secondAttribute="leading" constant="20" id="u2C-jS-zZ7"/>
+                            <constraint firstItem="kt8-3s-poO" firstAttribute="leading" secondItem="zbG-ba-rbk" secondAttribute="leading" constant="24" id="u2C-jS-zZ7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zbG-ba-rbk"/>
                     </view>

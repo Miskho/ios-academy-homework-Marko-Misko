@@ -11,6 +11,7 @@ import Alamofire
 import CodableAlamofire
 import PromiseKit
 import SVProgressHUD
+import DZNEmptyDataSet
 
 class CommentsViewController: UIViewController {
     
@@ -39,6 +40,7 @@ class CommentsViewController: UIViewController {
             action: #selector(didSelectBack)
         )
         
+        navigationItem.leftBarButtonItem?.tintColor = .white
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -64,8 +66,6 @@ class CommentsViewController: UIViewController {
     
     private func _setupCommentsViewController() {
         SVProgressHUD.show()
-        
-        newCommentTextField.layer.cornerRadius = 25.0
         
         _fetchComments()
             .done { [weak self]  in
@@ -116,6 +116,8 @@ class CommentsViewController: UIViewController {
         
         commentsTableView.delegate = self
         commentsTableView.dataSource = self
+        commentsTableView.emptyDataSetSource = self
+        commentsTableView.emptyDataSetDelegate = self
     }
     
     private func _sendRequestForPostingComment(_ comment: String, episodeId: String) -> Promise<Comment> {
@@ -193,3 +195,18 @@ extension CommentsViewController: UITableViewDataSource {
     
 }
 
+extension CommentsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    
+    // Add description/subtitle on empty dataset
+    func description(forEmptyDataSet _: UIScrollView!) -> NSAttributedString! {
+        let str = "Sorry, we don't have any comments yet. \n Be first who will write review."
+        let attrs = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
+    // Add your image
+    func image(forEmptyDataSet _: UIScrollView!) -> UIImage! {
+        return UIImage(named: "img-placehoder-comments")
+    }
+    
+}

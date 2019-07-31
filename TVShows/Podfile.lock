@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.8.2)
   - CodableAlamofire (1.1.1):
     - Alamofire (~> 4.0)
+  - DZNEmptyDataSet (1.8.1)
   - KeychainAccess (3.2.0)
   - Kingfisher (5.7.0)
   - PromiseKit (6.10.0):
@@ -21,6 +22,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - CodableAlamofire
+  - DZNEmptyDataSet
   - KeychainAccess
   - Kingfisher (~> 5.0)
   - PromiseKit (~> 6.8)
@@ -31,6 +33,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - CodableAlamofire
+    - DZNEmptyDataSet
     - KeychainAccess
     - Kingfisher
     - PromiseKit
@@ -39,11 +42,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   CodableAlamofire: b587c1198562824abb1f468aed34feb00d6cecd8
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   KeychainAccess: 3b1bf8a77eb4c6ea1ce9404c292e48f948954c6b
   Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
   PromiseKit: 1fdaeb6c0a94a5114fcb814ff3d772b86886ad4e
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 1b7804b5806ac2ad716146d9b95f193eb3818dd5
+PODFILE CHECKSUM: a980a32375ddc44e8cc82859e37cb46696f7189e
 
 COCOAPODS: 1.7.3

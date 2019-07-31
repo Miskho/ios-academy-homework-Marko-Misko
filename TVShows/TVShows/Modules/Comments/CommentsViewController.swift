@@ -40,7 +40,6 @@ class CommentsViewController: UIViewController {
             action: #selector(didSelectBack)
         )
         
-        navigationItem.leftBarButtonItem?.tintColor = .white
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -66,7 +65,8 @@ class CommentsViewController: UIViewController {
     
     private func _setupCommentsViewController() {
         SVProgressHUD.show()
-        
+        _setupNewCommentTextField()
+
         _fetchComments()
             .done { [weak self]  in
                 self?.comments = $0
@@ -76,6 +76,13 @@ class CommentsViewController: UIViewController {
             }.catch {
                 print("API failure: \($0)")
         }
+    }
+    
+    private func _setupNewCommentTextField() {
+        newCommentTextField.layer.cornerRadius = 20
+        newCommentTextField.layer.borderWidth = 0.5
+        newCommentTextField.layer.borderColor = UIColor.darkGray.cgColor
+        newCommentTextField.layer.masksToBounds = true
     }
     
     private func _postNewComment() {

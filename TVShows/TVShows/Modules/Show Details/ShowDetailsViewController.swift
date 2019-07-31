@@ -18,6 +18,7 @@ class ShowDetailsViewController: UIViewController {
     @IBOutlet private weak var episodesTableView: UITableView!
     
     // MARK: - Properties
+    private let refreshControl = UIRefreshControl()
     private var show: TVShow?
     private var loginCredentials: LoginData?
     private var showDetails: ShowDetails?
@@ -106,6 +107,25 @@ class ShowDetailsViewController: UIViewController {
         
         episodesTableView.delegate = self
         episodesTableView.dataSource = self
+        
+        if #available(iOS 10.0, *) {
+            episodesTableView.refreshControl = refreshControl
+        } else {
+            episodesTableView.addSubview(refreshControl)
+        }
+        refreshControl.addTarget(self, action: #selector(refreshEpisodesData(_:)), for: .valueChanged)
+    }
+    
+    @objc private func refreshEpisodesData(_ sender: Any) {
+        _fetchEpisodes()
+            .done { [weak self]  in
+                guard let self = self else { return }
+                self.episodes = $0
+                self._displayShowDetails()
+                self.refreshControl.endRefreshing()
+            }.catch {
+                print("API failure: \($0)")
+        }
     }
     
     private func _navigateToNewEpisodeViewController() {

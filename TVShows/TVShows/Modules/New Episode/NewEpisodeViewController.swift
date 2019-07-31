@@ -100,6 +100,7 @@ class NewEpisodeViewController: UIViewController, UINavigationControllerDelegate
             !episodeDescription.isEmpty
             else {
                 _displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not add new episode", message: "Please provide all fields below for registering new episode.", preferredStyle: .alert))
+                SVProgressHUD.dismiss()
                 return
         }
         let headers = ["Authorization": loginCredentials!.token]

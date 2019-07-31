@@ -92,6 +92,9 @@
                                                             </constraints>
                                                         </view>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="jQK-Ci-aDX" firstAttribute="top" secondItem="bWI-ZX-w3o" secondAttribute="bottom" constant="10" id="rI6-sA-jG3"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>

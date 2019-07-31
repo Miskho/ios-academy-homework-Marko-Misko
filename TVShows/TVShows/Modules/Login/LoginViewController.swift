@@ -14,14 +14,16 @@ import SVProgressHUD
 
 final class LoginViewController : UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet private weak var rememberMeButton: UIButton!
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     
+    // MARK: - Properties
     private var loginCredentials: LoginData?
     private var loginUser: User?
     
-    
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         SVProgressHUD.setDefaultMaskType(.black)
@@ -29,10 +31,9 @@ final class LoginViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    
+    // MARK: - Outlet actions
     @IBAction private func logInButtonPressed(_ sender: Any) {
         guard
             let email = emailTextField.text,
@@ -64,27 +65,33 @@ final class LoginViewController : UIViewController {
         rememberMeButton.isSelected.toggle()
     }
     
-    
+    // MARK: - Private methods
     private func _navigateToHomeView() {
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         let homeViewController = homeStoryboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        homeViewController.configureBeforeNavigating(with: loginCredentials!)
+        navigationController?.setViewControllers([homeViewController], animated: true)
+    }
+    
+    private func _displaySimpleDisposableAlertUsing(_ alertController: UIAlertController) {
+        let OKAction = UIAlertAction(title: "Ok", style: .default) { _ in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(OKAction)
         
-        homeViewController.loginCredentials = loginCredentials
-        homeViewController.loginUser = loginUser
-        
-        navigationController?.pushViewController(homeViewController, animated: true)
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }
 
-// Provides the same API functionalities using Promises from PromiseKit
+// Provides API functionalities using Promises from PromiseKit
 extension LoginViewController {
     
     private func _registerUserWith(email: String, password: String) {
         SVProgressHUD.show()
         firstly { () -> Promise<User> in
             return _sendAlamofireHTTPRequestTo(
-                  url: "https://api.infinum.academy/api/users"
+                "https://api.infinum.academy/api/users"
                 , method: .post
                 , email: email
                 , password: password)
@@ -94,7 +101,7 @@ extension LoginViewController {
                 }
                 self.loginUser = user
                 return self._sendAlamofireHTTPRequestTo(
-                      url:"https://api.infinum.academy/api/users/sessions"
+                    "https://api.infinum.academy/api/users/sessions"
                     , method: .post
                     , email: email
                     , password: password)
@@ -104,7 +111,8 @@ extension LoginViewController {
                 self._navigateToHomeView()
             }.ensure {
                 SVProgressHUD.dismiss()
-            }.catch {
+            }.catch { [weak self] in
+                self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not register in with provided credentials", message: "Please check if the email and password you have provided are valid ones.", preferredStyle: .alert))
                 print("API failure: \($0)")
         }
     }
@@ -113,7 +121,7 @@ extension LoginViewController {
         SVProgressHUD.show()
         firstly { () -> Promise<LoginData> in
             _sendAlamofireHTTPRequestTo(
-                  url: "https://api.infinum.academy/api/users/sessions"
+                "https://api.infinum.academy/api/users/sessions"
                 , method: .post
                 , email: email
                 , password: password)
@@ -126,12 +134,13 @@ extension LoginViewController {
             }
             .ensure {
                 SVProgressHUD.dismiss()
-            }.catch {
+            }.catch { [weak self] in
+                self?._displaySimpleDisposableAlertUsing(UIAlertController(title: "Could not log in with provided credentials", message: "Please register yourself or check if the email and password you have provided are valid ones.", preferredStyle: .alert))
                 print("API failure: \($0)")
         }
     }
     
-    private func _sendAlamofireHTTPRequestTo<T: Codable>(url: String, method: HTTPMethod, email: String, password: String) -> Promise<T>{
+    private func _sendAlamofireHTTPRequestTo<T: Codable>(_ url: String, method: HTTPMethod, email: String, password: String) -> Promise<T>{
         return Alamofire.request(
             url,
             method: method,
@@ -143,5 +152,4 @@ extension LoginViewController {
             .validate()
             .responseDecodable(T.self, keyPath: "data")
     }
-
 }

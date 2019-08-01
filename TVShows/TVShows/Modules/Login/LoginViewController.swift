@@ -195,8 +195,7 @@ extension LoginViewController {
                     , method: .post
                     , email: email
                     , password: password)
-            }.done { [weak self] in
-                print("Success: \($0)")
+            }.done { [weak self] _ in
                 guard let self = self else { return }
                 self._navigateToHomeView()
             }.ensure {
@@ -219,7 +218,6 @@ extension LoginViewController {
             .done { [weak self] in
                 guard let self = self else { return }
                 self.loginCredentials = $0
-                print("Success: \($0)")
                 self._persistRemeberedUser(RememberedUser(email: email, password: password))
                 self._navigateToHomeView()
             }

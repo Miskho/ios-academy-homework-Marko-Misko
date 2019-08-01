@@ -44,6 +44,34 @@ class ShowDetailsViewController: UIViewController {
         _navigateToNewEpisodeViewController()
     }
     
+    @IBAction private func likeButtonPressed(_ sender: Any) {
+        _updateLikesCount(increment: true)
+    }
+    
+    @IBAction private func dislikeButtonPressed(_ sender: Any) {
+        _updateLikesCount(increment: false)
+    }
+    
+    private func _updateLikesCount(increment: Bool) {
+        let headers = ["Authorization": loginCredentials!.token]
+        let urlSufix = increment ? "like" : "dislike"
+        Alamofire
+            .request(
+                "https://api.infinum.academy/api/shows/\(show!.id)/\(urlSufix)",
+                method: .post,
+                encoding: JSONEncoding.default,
+                headers: headers
+            ).validate()
+            .responseDecodable(ShowDetailsLikeable.self)
+            .done { [weak self] in
+                if let detailsCell = self?.episodesTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? ShowInfoTableViewCell {
+                    detailsCell.setLikesCount(to: $0.likesCount)
+                }
+            }.catch {
+                print("API failure: \($0)")
+        }
+    }
+    
     // MARK: - Public methods
     func configureBeforeNavigating(with show: TVShow, credentials: LoginData) {
         loginCredentials = credentials
@@ -96,6 +124,7 @@ class ShowDetailsViewController: UIViewController {
     
     private func _displayShowDetails() {
         _setupTableView()
+        
         episodesTableView.reloadData()
     }
     

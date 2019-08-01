@@ -16,6 +16,7 @@ class ShowInfoTableViewCell: UITableViewCell {
     @IBOutlet private weak var showTitleLabel: UILabel!
     @IBOutlet private weak var showDescriptionLabel: UILabel!
     @IBOutlet private weak var episodeCountLabel: UILabel!
+    @IBOutlet private weak var likesCountLabel: UILabel!
     
     // MARK: - UITableViewCell
    override func awakeFromNib() {
@@ -45,6 +46,12 @@ class ShowInfoTableViewCell: UITableViewCell {
         showTitleLabel.text = nil
         showDescriptionLabel.text = nil
         episodeCountLabel.text = nil
+        likesCountLabel.text = nil
+    }
+    
+    // MARK: - Public methods
+    func setLikesCount(to likesCount: Int) {
+        likesCountLabel.text = String(likesCount)
     }
  
 }
@@ -69,6 +76,7 @@ extension ShowInfoTableViewCell {
         showTitleLabel.text = details.title
         showDescriptionLabel.text = details.description
         episodeCountLabel.text = String(episodesCount)
+        likesCountLabel.text = String(details.likesCount)
     }
     
 }

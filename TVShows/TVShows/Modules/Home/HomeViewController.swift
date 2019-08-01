@@ -118,7 +118,6 @@ final class HomeViewController: UIViewController {
                 .responseDecodable([TVShow].self, keyPath: "data")
             }.done() { [weak self]  in
                 guard let self = self else { return }
-                print("Success: \($0)")
                 self.tvShows = $0
                 self.tableView.reloadData()
                 self.collectionView.reloadData()

@@ -103,7 +103,7 @@ class ShowDetailsViewController: UIViewController {
         episodesTableView.estimatedRowHeight = 110
         episodesTableView.rowHeight = UITableView.automaticDimension
         episodesTableView.tableFooterView = UIView()
-        episodesTableView.allowsSelection = false
+        episodesTableView.allowsSelection = true
         
         episodesTableView.delegate = self
         episodesTableView.dataSource = self
@@ -161,6 +161,9 @@ extension ShowDetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if let selectedEpisodeCell = tableView.cellForRow(at: indexPath) as? EpisodeTableViewCell {
+            selectedEpisodeCell.navigateToButtonsEpisode()
+        }
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

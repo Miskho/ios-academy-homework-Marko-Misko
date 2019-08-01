@@ -46,6 +46,7 @@ class CommentsViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func postCommentButtonTapped(_ sender: Any) {
         _postNewComment()
+        _deleteTextFromTextField()
     }
     
     // MARK: - Public methods
@@ -57,6 +58,10 @@ class CommentsViewController: UIViewController {
     // MARK: - Private methods
     @objc private func didSelectBack() {
         _navigateToEpisodeDetailsViewController()
+    }
+    
+    private func _deleteTextFromTextField() {
+        newCommentTextField.text = nil
     }
     
     private func _navigateToEpisodeDetailsViewController() {

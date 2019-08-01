@@ -16,8 +16,8 @@ import KeychainAccess
 final class LoginViewController : UIViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var logoImage: UIImageView!
+    @IBOutlet private weak var loginButton: UIButton!
+    @IBOutlet private weak var logoImage: UIImageView!
     @IBOutlet private weak var rememberMeButton: UIButton!
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
@@ -31,6 +31,8 @@ final class LoginViewController : UIViewController {
         super.viewDidLoad()
         SVProgressHUD.setDefaultMaskType(.black)
         _scaleLogoImage()
+        _enableButton(false)
+        [emailTextField, passwordTextField].forEach({ $0.addTarget(self, action: #selector(editingChanged), for: .editingChanged) })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,6 +148,28 @@ final class LoginViewController : UIViewController {
             keychain[KeychainConstants.Keys.rememberedEmail.rawValue] = user.email
             keychain[KeychainConstants.Keys.rememberedPassword.rawValue] = user.password
         }
+    }
+    
+    @objc func editingChanged(_ textField: UITextField) {
+        if textField.text?.count == 1 {
+            if textField.text?.first == " " {
+                textField.text = ""
+                return
+            }
+        }
+        guard
+            let habit = emailTextField.text, !habit.isEmpty,
+            let goal = passwordTextField.text, !goal.isEmpty
+            else {
+                _enableButton(false)
+                return
+        }
+        _enableButton(true)
+    }
+    
+    private func _enableButton(_ enabled: Bool) {
+        loginButton.isEnabled = enabled
+        loginButton.backgroundColor = enabled ? UIColor(rgb: 0xFF758C) : .darkGray
     }
     
 }

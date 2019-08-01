@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ShowInfoTableViewCell: UITableViewCell {
 
@@ -28,6 +29,8 @@ class ShowInfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        selectionStyle = UITableViewCell.SelectionStyle.none
+        
         gradient.frame = showImage.bounds
         gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
         gradient.locations = [0.1, 0.9, 1]
@@ -48,7 +51,19 @@ class ShowInfoTableViewCell: UITableViewCell {
 extension ShowInfoTableViewCell {
     
     func configure(with details: ShowDetails, episodesCount: Int) {
-        showImage.image = UIImage(named: "OfficeLogo")
+        
+        let url = URL(string: "https://api.infinum.academy\(details.imageUrl)")
+        let processor = DownsamplingImageProcessor(size: showImage.frame.size)
+        showImage.kf.indicatorType = .activity
+        showImage.kf.setImage(
+            with: url,
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
+        
         showTitleLabel.text = details.title
         showDescriptionLabel.text = details.description
         episodeCountLabel.text = String(episodesCount)

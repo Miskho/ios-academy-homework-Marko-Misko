@@ -11,6 +11,7 @@ import Alamofire
 import CodableAlamofire
 import PromiseKit
 import SVProgressHUD
+import Kingfisher
 
 class EpisodeDetailsViewController: UIViewController {
     
@@ -92,6 +93,19 @@ class EpisodeDetailsViewController: UIViewController {
     }
     
     private func _fillInEpisodeDetails() {
+        
+        let url = URL(string: "https://api.infinum.academy\(episode!.imageUrl)")
+        let processor = DownsamplingImageProcessor(size: episodeImage.frame.size) >> RoundCornerImageProcessor(cornerRadius: 20)
+        episodeImage.kf.indicatorType = .activity
+        episodeImage.kf.setImage(
+            with: url,
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
+        
         episodeNameLabel.text = episode!.title
         episodeAndSeasonNumberLabel.text = "S" + episode!.season + " Ep" + episode!.episodeNumber
         episodeDescriptionLabel.text = episode!.description

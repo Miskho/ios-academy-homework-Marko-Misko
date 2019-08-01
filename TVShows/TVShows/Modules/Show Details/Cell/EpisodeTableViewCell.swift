@@ -47,5 +47,11 @@ extension EpisodeTableViewCell {
         episodeDetailsButtonAction = action
     }
     
+    func navigateToButtonsEpisode() {
+        if let action = episodeDetailsButtonAction {
+            action()
+        }
+    }
+    
 }
 

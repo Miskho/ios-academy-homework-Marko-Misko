@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RKy-A7-mnd">
-                                <rect key="frame" x="0.0" y="88" width="414" height="700"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ShowInfoTableViewCell" rowHeight="592" id="eyK-QD-Uao" customClass="ShowInfoTableViewCell" customModule="TVShows" customModuleProvider="target">
@@ -32,7 +32,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="M8C-6T-l5H">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="592"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OfficeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="bWI-ZX-w3o">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bWI-ZX-w3o">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="350" id="do8-Cw-ggO"/>
@@ -174,7 +174,7 @@
                             <constraint firstItem="se0-Id-tsX" firstAttribute="trailing" secondItem="Hm9-Sj-hGu" secondAttribute="trailing" id="Ftq-SI-Wot"/>
                             <constraint firstItem="RKy-A7-mnd" firstAttribute="top" secondItem="se0-Id-tsX" secondAttribute="top" id="IrK-XU-JAU"/>
                             <constraint firstItem="RKy-A7-mnd" firstAttribute="trailing" secondItem="se0-Id-tsX" secondAttribute="trailing" id="RS4-4O-Wb7"/>
-                            <constraint firstItem="Hm9-Sj-hGu" firstAttribute="top" secondItem="RKy-A7-mnd" secondAttribute="bottom" id="U5f-qb-6zv"/>
+                            <constraint firstItem="RKy-A7-mnd" firstAttribute="bottom" secondItem="kIx-zP-xZW" secondAttribute="bottom" id="Wlp-j5-Vcm"/>
                             <constraint firstItem="ihi-Qm-q3z" firstAttribute="leading" secondItem="se0-Id-tsX" secondAttribute="leading" constant="16" id="ick-e8-Eiw"/>
                             <constraint firstItem="RKy-A7-mnd" firstAttribute="leading" secondItem="se0-Id-tsX" secondAttribute="leading" id="q2L-2g-MXN"/>
                             <constraint firstItem="ihi-Qm-q3z" firstAttribute="top" secondItem="se0-Id-tsX" secondAttribute="top" constant="16" id="syU-P1-z3a"/>
@@ -210,7 +210,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="OfficeLogo" width="1083" height="576"/>
         <image name="ic-fab-button" width="68" height="74"/>
         <image name="ic-navigate-back" width="32" height="32"/>
         <image name="ic-navigation-chevron-right-medium" width="24" height="24"/>

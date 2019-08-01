@@ -113,7 +113,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="kt8-3s-poO" secondAttribute="bottom" constant="20" id="B2C-JQ-kYo"/>
+                            <constraint firstItem="kt8-3s-poO" firstAttribute="bottom" secondItem="IAd-oH-aaT" secondAttribute="bottom" constant="-20" id="B2C-JQ-kYo"/>
                             <constraint firstItem="Ndo-4F-T5n" firstAttribute="trailing" secondItem="zbG-ba-rbk" secondAttribute="trailing" id="Epc-1X-9RE"/>
                             <constraint firstItem="Ndo-4F-T5n" firstAttribute="top" secondItem="zbG-ba-rbk" secondAttribute="top" id="KEx-4Z-YlU"/>
                             <constraint firstItem="kt8-3s-poO" firstAttribute="centerX" secondItem="IAd-oH-aaT" secondAttribute="centerX" id="R0m-YP-96A"/>

@@ -24,7 +24,6 @@ class EpisodeDetailsViewController: UIViewController {
     // MARK: - Properties
     private var loginCredentials: LoginData?
     private var episode: Episode?
-    private let gradient = CAGradientLayer()
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
@@ -35,11 +34,6 @@ class EpisodeDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        gradient.frame = episodeImage.bounds
     }
     
     // MARK: - Outlet actions
@@ -59,10 +53,20 @@ class EpisodeDetailsViewController: UIViewController {
     
     // MARK: - Private methods
     private func _setupGradient() {
-        gradient.frame = episodeImage.bounds
-        gradient.colors = [UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
-        gradient.locations = [0.1, 0.9, 1]
-        episodeImage.layer.mask = gradient
+        let gradient = CAGradientLayer()
+        gradient.frame = episodeImage.frame
+        gradient.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
+        gradient.locations = [0.8, 1]
+        
+        let gradImageView = UIImageView(image: gradient.createGradientImage())
+        view.addSubview(gradImageView)
+        gradImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            gradImageView.leftAnchor.constraint(equalTo: episodeImage.leftAnchor),
+            gradImageView.topAnchor.constraint(equalTo: episodeImage.topAnchor),
+            gradImageView.rightAnchor.constraint(equalTo: episodeImage.rightAnchor),
+            gradImageView.bottomAnchor.constraint(equalTo: episodeImage.bottomAnchor),
+            ])
     }
     
     private func _setupEpisodeDetailsViewController() {
@@ -95,7 +99,7 @@ class EpisodeDetailsViewController: UIViewController {
     private func _fillInEpisodeDetails() {
         
         let url = URL(string: "https://api.infinum.academy\(episode!.imageUrl)")
-        let processor = DownsamplingImageProcessor(size: episodeImage.frame.size) >> RoundCornerImageProcessor(cornerRadius: 20)
+        let processor = DownsamplingImageProcessor(size: episodeImage.frame.size)
         episodeImage.kf.indicatorType = .activity
         episodeImage.kf.setImage(
             with: url,

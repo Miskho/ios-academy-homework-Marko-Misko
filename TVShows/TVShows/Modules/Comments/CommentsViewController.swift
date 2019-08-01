@@ -197,14 +197,29 @@ extension CommentsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? { 
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (action, indexPath) in
+            guard let self = self else { return }
+            self._deleteCommentFromAPI(commentId: self.comments[indexPath.row].id)
             self.comments.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.reloadData()
         }
         
         return [delete]
     }
+    
+    private func _deleteCommentFromAPI(commentId: String) {
+        let headers = ["Authorization": loginCredentials!.token]
+        Alamofire
+            .request(
+                "https://api.infinum.academy/api/comments/\(commentId)",
+                method: .delete,
+                encoding: JSONEncoding.default,
+                headers: headers
+            ).validate()
+    }
+    
 }
 
 
@@ -222,11 +237,12 @@ extension CommentsViewController: UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return false
+        return true
     }
     
 }
 
+// MARK: - EmptyDataSetTableView
 extension CommentsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     // Add description/subtitle on empty dataset

@@ -154,8 +154,8 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.tvShows.remove(at: indexPath.row)
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { [weak self] (action, indexPath) in
+            self?.tvShows.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
      

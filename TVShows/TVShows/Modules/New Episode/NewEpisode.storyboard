@@ -27,6 +27,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNV-zR-U0e">
                                                 <rect key="frame" x="0.0" y="0.0" width="366" height="300"/>
                                                 <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WX6-qV-Gwy">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="300"/>
+                                                    </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ecn-RX-rap">
                                                         <rect key="frame" x="58" y="100" width="250" height="100"/>
                                                         <constraints>
@@ -39,13 +42,20 @@
                                                         <state key="normal" title="Upload photo" image="ic-camera">
                                                             <color key="titleColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="loadImageButtonTapped:" destination="UEF-HE-JkF" eventType="touchUpInside" id="nzD-F8-QOO"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="WX6-qV-Gwy" secondAttribute="trailing" id="1VK-xz-fEJ"/>
                                                     <constraint firstAttribute="height" constant="300" id="BNS-3N-P3F"/>
+                                                    <constraint firstItem="WX6-qV-Gwy" firstAttribute="top" secondItem="RNV-zR-U0e" secondAttribute="top" id="Cfr-Y7-0Fq"/>
                                                     <constraint firstItem="ecn-RX-rap" firstAttribute="centerX" secondItem="RNV-zR-U0e" secondAttribute="centerX" id="IDa-O5-zbo"/>
+                                                    <constraint firstAttribute="bottom" secondItem="WX6-qV-Gwy" secondAttribute="bottom" id="Lx6-ZB-9Am"/>
                                                     <constraint firstItem="ecn-RX-rap" firstAttribute="centerY" secondItem="RNV-zR-U0e" secondAttribute="centerY" id="Rc3-7J-NF4"/>
+                                                    <constraint firstItem="WX6-qV-Gwy" firstAttribute="leading" secondItem="RNV-zR-U0e" secondAttribute="leading" id="YaF-rN-Xev"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="BTD-mv-VXR">
@@ -165,8 +175,10 @@
                     </view>
                     <connections>
                         <outlet property="episodeDescriptionTextField" destination="CB2-WL-hD5" id="PnR-AE-7cT"/>
+                        <outlet property="episodeImage" destination="WX6-qV-Gwy" id="C79-4a-npL"/>
                         <outlet property="episodeNumberTextField" destination="rRE-H3-dvy" id="ehe-uC-E0q"/>
                         <outlet property="episodeTitleTextField" destination="JSn-wa-fom" id="V1M-1R-V6n"/>
+                        <outlet property="loadImageButton" destination="ecn-RX-rap" id="zDr-zk-ebO"/>
                         <outlet property="seasonNumberTextField" destination="DqH-9N-rC0" id="0SS-3P-6N3"/>
                     </connections>
                 </viewController>

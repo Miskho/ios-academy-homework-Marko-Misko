@@ -18,6 +18,7 @@ class ShowDetailsViewController: UIViewController {
     @IBOutlet private weak var episodesTableView: UITableView!
     
     // MARK: - Properties
+    private let refreshControl = UIRefreshControl()
     private var show: TVShow?
     private var loginCredentials: LoginData?
     private var showDetails: ShowDetails?
@@ -26,17 +27,49 @@ class ShowDetailsViewController: UIViewController {
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: true)
         _setupShowDetailsViewController()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     // MARK: - Outlet actions
-    @IBAction func backToHomeButtonPressed(_ sender: Any) {
+    @IBAction private func backToHomeButtonPressed(_ sender: Any) {
         _navigateToHomeViewController()
     }
     
-    @IBAction func newEpisodeButtonPressed(_ sender: Any) {
+    @IBAction private func newEpisodeButtonPressed(_ sender: Any) {
         _navigateToNewEpisodeViewController()
+    }
+    
+    @IBAction private func likeButtonPressed(_ sender: Any) {
+        _updateLikesCount(increment: true)
+    }
+    
+    @IBAction private func dislikeButtonPressed(_ sender: Any) {
+        _updateLikesCount(increment: false)
+    }
+    
+    private func _updateLikesCount(increment: Bool) {
+        let headers = ["Authorization": loginCredentials!.token]
+        let urlSufix = increment ? "like" : "dislike"
+        Alamofire
+            .request(
+                "https://api.infinum.academy/api/shows/\(show!.id)/\(urlSufix)",
+                method: .post,
+                encoding: JSONEncoding.default,
+                headers: headers
+            ).validate()
+            .responseDecodable(ShowDetailsLikeable.self)
+            .done { [weak self] in
+                if let detailsCell = self?.episodesTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? ShowInfoTableViewCell {
+                    detailsCell.setLikesCount(to: $0.likesCount)
+                }
+            }.catch {
+                print("API failure: \($0)")
+        }
     }
     
     // MARK: - Public methods
@@ -91,6 +124,7 @@ class ShowDetailsViewController: UIViewController {
     
     private func _displayShowDetails() {
         _setupTableView()
+        
         episodesTableView.reloadData()
     }
     
@@ -98,10 +132,29 @@ class ShowDetailsViewController: UIViewController {
         episodesTableView.estimatedRowHeight = 110
         episodesTableView.rowHeight = UITableView.automaticDimension
         episodesTableView.tableFooterView = UIView()
-        episodesTableView.allowsSelection = false
+        episodesTableView.allowsSelection = true
         
         episodesTableView.delegate = self
         episodesTableView.dataSource = self
+        
+        if #available(iOS 10.0, *) {
+            episodesTableView.refreshControl = refreshControl
+        } else {
+            episodesTableView.addSubview(refreshControl)
+        }
+        refreshControl.addTarget(self, action: #selector(refreshEpisodesData(_:)), for: .valueChanged)
+    }
+    
+    @objc private func refreshEpisodesData(_ sender: Any) {
+        _fetchEpisodes()
+            .done { [weak self]  in
+                guard let self = self else { return }
+                self.episodes = $0
+                self._displayShowDetails()
+                self.refreshControl.endRefreshing()
+            }.catch {
+                print("API failure: \($0)")
+        }
     }
     
     private func _navigateToNewEpisodeViewController() {
@@ -115,7 +168,18 @@ class ShowDetailsViewController: UIViewController {
     }
     
     private func _navigateToHomeViewController() {
+        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func _navigateToEpisodeDetailsViewController(with episode: Episode) {
+        let episodeDetailsStoryboard = UIStoryboard(name: "EpisodeDetails", bundle: nil)
+        let episodeDetailsViewController = episodeDetailsStoryboard.instantiateViewController(withIdentifier: "EpisodeDetailsViewController") as! EpisodeDetailsViewController
+        episodeDetailsViewController.configureBeforeNavigating(with: episode, credentials: loginCredentials!)
+        
+        let navigationController = UINavigationController(rootViewController:
+            episodeDetailsViewController)
+        present(navigationController, animated: true)
     }
     
 }
@@ -126,6 +190,9 @@ extension ShowDetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if let selectedEpisodeCell = tableView.cellForRow(at: indexPath) as? EpisodeTableViewCell {
+            selectedEpisodeCell.navigateToButtonsEpisode()
+        }
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -149,10 +216,15 @@ extension ShowDetailsViewController: UITableViewDataSource {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ShowInfoTableViewCell.self), for: indexPath) as! ShowInfoTableViewCell
             cell.configure(with: showDetails!, episodesCount: episodes.count)
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EpisodeTableViewCell.self), for: indexPath) as! EpisodeTableViewCell
-            cell.configure(with: episodes[indexPath.row - 1])
+            cell.configure(with: episodes[indexPath.row - 1]) { [unowned self] in
+                let selectedEpisode = self.episodes[indexPath.row - 1]
+                self._navigateToEpisodeDetailsViewController(with: selectedEpisode)
+            }
+            
             return cell
         }
     }
@@ -166,7 +238,18 @@ extension ShowDetailsViewController: UITableViewDataSource {
 extension ShowDetailsViewController: NewEpisodeReloadTableViewDelegate {
     
     func newEpisodeAdded() {
-        episodesTableView.reloadData()
+        SVProgressHUD.show()
+        
+        firstly {
+            return _fetchEpisodes()
+            }.done { [weak self] in
+                self?.episodes = $0
+                self?.episodesTableView.reloadData()
+            }.ensure {
+                SVProgressHUD.dismiss()
+            }.catch {
+                print("API failure: \($0)")
+        }
     }
     
 }

@@ -26,3 +26,21 @@ struct ShowDetails: Codable {
         case imageUrl
     }
 }
+
+struct ShowDetailsLikeable: Codable {
+    let type: String
+    let title: String
+    let mediaId: String
+    let id: String
+    let likesCount: Int
+    let description: String
+    
+    enum CodingKeys: String, CodingKey {
+        case type
+        case title
+        case mediaId
+        case id = "_id"
+        case likesCount
+        case description
+    }
+}

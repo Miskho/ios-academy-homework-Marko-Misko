@@ -67,7 +67,7 @@
                                                                 </constraints>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                             </textField>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6b-WS-PaB">
                                                                 <rect key="frame" x="0.0" y="32" width="366" height="1"/>
@@ -111,7 +111,7 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40C-Tb-wda">
                                                         <rect key="frame" x="0.0" y="0.0" width="366" height="50"/>
-                                                        <color key="backgroundColor" red="1" green="0.45882352941176469" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="pRD-vj-f9W"/>
                                                         </constraints>
@@ -181,6 +181,8 @@
                     <navigationItem key="navigationItem" id="Bbl-aV-fA5"/>
                     <connections>
                         <outlet property="emailTextField" destination="h83-UI-V4Z" id="flr-TB-KY4"/>
+                        <outlet property="loginButton" destination="40C-Tb-wda" id="KVh-Uh-0qj"/>
+                        <outlet property="logoImage" destination="CYG-Bs-uI3" id="2qZ-GD-haR"/>
                         <outlet property="passwordTextField" destination="XQB-Q7-wUs" id="OCD-JV-8F9"/>
                         <outlet property="rememberMeButton" destination="lKn-Se-UIJ" id="6am-Ch-Txq"/>
                         <outlet property="view" destination="APe-NI-6iQ" id="J4c-bS-GzR"/>
